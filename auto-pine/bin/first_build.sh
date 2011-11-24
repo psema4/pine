@@ -78,7 +78,7 @@ mv -v ${SRC_IMG} ${DST_IMG}
 
 echo ""
 echo "Running first boot, hda=${DST_IMG}"
-qemu-system-arm -kernel ./kernel-qemu -cpu arm1136-r2 -M versatilepb -no-reboot -append "root=/dev/sda2 panic=1" -hda ${DST_IMG}
+qemu-system-arm -kernel ./kernel-qemu.1176 -cpu arm1176 -M versatilepb -no-reboot -append "root=/dev/sda2 panic=1" -hda ${DST_IMG}
 
 echo ""
 echo "Stage: 2 (Pine Setup)"
@@ -111,6 +111,6 @@ echo ""
 echo "./pine.sh"
 
 echo "#!/usr/bin/env bash" > pine.sh
-echo "qemu-system-arm -kernel ./kernel-qemu -cpu arm1136-r2 -M versatilepb -append \"root=/dev/sda2 panic=1\" -hda ${DST_IMG}" >> pine.sh
+echo "qemu-system-arm -kernel ./kernel-qemu.1176 -cpu arm1176 -M versatilepb -append \"root=/dev/sda2 panic=1\" -hda ${DST_IMG}" >> pine.sh
 chmod 744 pine.sh
 
