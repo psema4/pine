@@ -1,0 +1,3 @@
+[submodule "dep/linux"]
+	path = dep/linux
+	url = git@github.com:raspberrypi/linux.git
