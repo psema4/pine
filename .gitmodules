@@ -1,3 +1,6 @@
 [submodule "dep/linux"]
 	path = dep/linux
 	url = git@github.com:raspberrypi/linux.git
+[submodule "dep/tools"]
+	path = dep/tools
+	url = https://github.com/raspberrypi/tools.git
