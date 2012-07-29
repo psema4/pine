@@ -2,6 +2,9 @@
 
 # CREATES A DIRECTORY AT ~/rpi/chroot-raspbian-armhf
 
+# This _gets_ the Raspbian rootfs and prepares it for development.  This is to
+# be run from a development environment, NOT the Raspberry Pi itself.
+
 # For Ubuntu.  Probably works elsewhere too.
 #
 # This script downloads the Raspbian file system into:
