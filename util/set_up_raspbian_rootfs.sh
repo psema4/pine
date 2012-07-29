@@ -34,8 +34,3 @@ sudo mount -o bind /dev ~/rpi/chroot-raspbian-armhf/dev
 # Do this each time you need to work with the Raspbian files.
 # Again, CONSIDER MAKING A BASH ALIAS.
 sudo LC_ALL=C chroot ~/rpi/chroot-raspbian-armhf
-
-# Add the Raspbian repo and set up a GPG key.
-echo "deb http://archive.raspbian.org/raspbian wheezy main" >> /etc/apt/sources.list
-wget http://archive.raspbian.org/raspbian.public.key -O - | apt-key add -
-apt-get update

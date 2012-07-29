@@ -12,7 +12,7 @@ deb-src http://archive.raspbian.org/raspbian wheezy main contrib non-free rpi
 deb http://archive.raspbian.org/mate wheezy main" \
 | cat > /etc/apt/sources.list
 
-# Add public key
+# Add GPG key
 wget http://archive.raspbian.org/raspbian.public.key -O - | sudo apt-key add -
 
 apt-get update
