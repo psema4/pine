@@ -20,7 +20,8 @@ apt-get update
 
 ####### GET DEPENDENCIES
 
-apt-get install curl xorg mate-core mate-desktop-environment nodejs
+apt-get install curl xorg mate-core mate-desktop-environment nodejs \
+  openssh-server
 
 # Install rpi-update (https://github.com/Hexxeh/rpi-update/)
 wget http://goo.gl/1BOfJ -O /usr/bin/rpi-update && chmod +x /usr/bin/rpi-update
@@ -30,6 +31,13 @@ wget http://goo.gl/1BOfJ -O /usr/bin/rpi-update && chmod +x /usr/bin/rpi-update
 
 # Install Hexxeh's Chromium. (http://hexxeh.net/?p=328117859)
 bash <(curl -sL http://goo.gl/go5yx)
+
+
+####### SSH
+
+# Make a safe backup.
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
+sudo chmod a-w /etc/ssh/sshd_config.original
 
 
 ####### PERFORMANCE HACKS
