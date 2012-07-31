@@ -20,8 +20,7 @@ apt-get update
 
 ####### GET DEPENDENCIES
 
-apt-get install curl xorg mate-core mate-desktop-environment nodejs \
-  openssh-server
+apt-get install curl xorg nodejs openssh-server
 
 # Install rpi-update (https://github.com/Hexxeh/rpi-update/)
 wget http://goo.gl/1BOfJ -O /usr/bin/rpi-update && chmod +x /usr/bin/rpi-update
@@ -51,8 +50,20 @@ rpi-update 224
 # Create the user "pine-user"
 useradd -m -s /bin/bash pine-user
 
-# Set up the pine-user's init file.
-echo "exec mate-session" | cat > /home/pine-user/.xinitrc
+# Set up pine-user's .bashrc file.
 
-su pine-user
-start x
+echo \
+"node pine.js &
+startx /opt/google/chrome/chrome --kiosk --disable-ipv6 --window-size=640,480 http://127.0.0.1:4444/" \
+| cat > /home/pine-user/.bashrc
+
+
+######## NODE APP BOOTSTRAP
+
+echo \
+"var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Welcome to Pine.\n');
+  }).listen(4444, '127.0.0.1');" \
+| cat > /home/pine-user/pine.js

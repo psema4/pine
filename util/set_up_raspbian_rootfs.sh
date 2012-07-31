@@ -26,7 +26,7 @@ sudo qemu-debootstrap --arch armhf wheezy chroot-raspbian-armhf http://archive.r
 
 # Mount some filesystems.  These calls to "mount" need to be done again after
 # rebooting, so CONSIDER MAKING A BASH ALIAS.
-Sudo mount -t proc proc ~/rpi/chroot-raspbian-armhf/proc
+sudo mount -t proc proc ~/rpi/chroot-raspbian-armhf/proc
 sudo mount -t sysfs sysfs ~/rpi/chroot-raspbian-armhf/sys
 sudo mount -o bind /dev ~/rpi/chroot-raspbian-armhf/dev
 
