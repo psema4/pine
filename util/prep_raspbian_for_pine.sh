@@ -1,8 +1,14 @@
 #!/bin/bash
 
 # Run in Raspbian.
+# RUN THIS AS ROOT.
 #
 # Sets up Raspbian environment and gets packages for Pine.
+
+if [[ $UID -ne 0 ]]; then
+  echo "$0 must be run as root"
+  exit 1
+fi
 
 
 ####### SET UP SOURCES
@@ -35,8 +41,8 @@ bash <(curl -sL http://goo.gl/go5yx)
 ####### SSH
 
 # Make a safe backup.
-sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
-sudo chmod a-w /etc/ssh/sshd_config.original
+cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
+chmod a-w /etc/ssh/sshd_config.original
 
 
 ####### PERFORMANCE HACKS
@@ -67,3 +73,12 @@ http.createServer(function (req, res) {
     res.end('Welcome to Pine.\n');
   }).listen(4444, '127.0.0.1');" \
 | cat > /home/pine-user/pine.js
+
+
+####### BOOTUP
+
+# At bootup, login as pine-user without a password prompt.
+# http://www.debianadmin.com/how-to-auto-login-and-startx-without-a-display-manager-in-debian.html
+# It looks fancy.  It's just a find-and-replace.
+cp /etc/inittab /etc/inittab.original
+sed -i 's/1:2345:respawn:\/sbin\/getty 38400 tty1/#1:2345:respawn:\/sbin\/getty 38400 tty1\n1:2345:respawn:\/bin\/login -f pine-user tty1 <\/dev\/tty1 >\/dev\/tty1 2>\&1/' /etc/inittab
