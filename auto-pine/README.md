@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-* [aria2c (Cross-platform command line bittorrent client)](<http://www.webupd8.org/2009/10/aria2-cross-platform-command-line-tool.html)
+* [aria2c (Cross-platform command line bittorrent client)](http://sourceforge.net/apps/trac/aria2/wiki/Download)
 * [QEMU](http://www.qemu.org/)
 
 
