@@ -16,9 +16,12 @@ vim defaults/boot/cmdline.txt # edit IP address for NFS server
 
 ### Build
 
-If you already have a source image:
+If you already have *this* source image archive:
 
-* Move or copy into the distro folder
+[[Source](http://www.raspberrypi.org/downloads)] 2012-07-15-wheezy-raspbian.zip [[Direct](http://downloads.raspberrypi.org/images/raspbian/2012-07-15-wheezy-raspbian/2012-07-15-wheezy-raspbian.zip)] [[Torrent (Preferred)](http://downloads.raspberrypi.org/images/raspbian/2012-07-15-wheezy-raspbian/2012-07-15-wheezy-raspbian.zip.torrent)] SHA-1:`3947412babbf63f9f022f1b0b22ea6a308bb630c`
+
+Then:
+* Move or copy the image archive into the distro folder
 * `sudo bin/unpack.sh`
 
 Otherwise: `sudo bin/download.sh`
