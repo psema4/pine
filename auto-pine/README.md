@@ -10,7 +10,7 @@
 
 ### Config
 
-If you're using an NFS image, you'll need to configure the ip address of the NFS server:
+You'll need to configure the ip address of the NFS server if you intend to use one.  Skip this step if not using NFS.
 
 ```
 vim defaults/boot/cmdline.txt # change 192.168.1.1 to the IP address of your NFS server
