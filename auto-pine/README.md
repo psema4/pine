@@ -40,14 +40,14 @@ time sudo bin/download.sh
 
 1. `sudo ./start-edit-session.sh`
 1. Edit files under `/mnt/pine-distro-loop/`
- 1. If using NFS, opy any files you want to keep from `/opt/pine-distro-nfs/` to `/mnt/pine-distro-loop/`
+ 1. If using NFS, copy any files you want to keep from `/opt/pine-distro-nfs/` to `/mnt/pine-distro-loop/`
 1. `sudo ./stop-edit-session.sh`
 1. If using NFS:
  1. `./reload-nfs.sh`
 
 ### Write to SD Card
 
-See the [RPi Easy SD Card Setup guide](http://elinux.org/RPi_Easy_SD_Card_Setup) to learn how to write the generated image files to your SD card.
+Run one (or both) of the following to generate `pine-sd.img` and/or `pine-sd-nfs.img` in the distro folder. See the [RPi Easy SD Card Setup guide](http://elinux.org/RPi_Easy_SD_Card_Setup) to learn how to write these generated image files to your SD card.
 
 ##### No NFS
 
