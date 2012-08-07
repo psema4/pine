@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# build sd card
+WD="./distro"
+
+echo "preparing image file"
+cp ${WD}/pine.img ${WD}/pine-sd.img
+
+echo "writing boot partition"
+dd if=${WD}/sd-boot.part of=${WD}/pine-sd.img conv=notrunc
+
+echo ""
+echo "Done. You may write ${WD}/pine-sd.img to your SD card now"
+echo ""
