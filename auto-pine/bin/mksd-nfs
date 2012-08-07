@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+WD="./distro"
+
+echo "preparing image file"
+cp ${WD}/pine.img ${WD}/pine-sd-nfs.img
+
+echo "writing boot partition"
+dd if=${WD}/sd-nfs-boot.part of=${WD}/pine-sd-nfs.img conv=notrunc
+
+echo ""
+echo "Done. You may write ${WD}/pine-sd-nfs.img to your SD card now"
+echo ""
+
