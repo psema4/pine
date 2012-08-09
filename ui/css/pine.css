@@ -1,3 +1,40 @@
+ul {
+  list-style: none;
+  margin: 0;
+}
+
 .container {
   padding-top: 30px;
 }
+
+.main-menu {
+  margin: 40px auto 0;
+  width: 960px;
+}
+
+  .main-menu .main-menu-btn-array {
+    overflow: auto;
+  }
+
+    .main-menu .main-menu-btn-array li {
+      float: left;
+      margin: 0 25px 35px;
+    }
+
+  .main-menu .main-menu-btn {
+    border-radius: 30px;
+    font-size: 34px;
+    height: 120px;
+    width: 260px;
+  }
+
+  .main-menu .main-menu-btn.selected,
+  .main-menu .main-menu-btn:focus {
+    outline: none;
+    -webkit-box-shadow: inset 0 0 12px 2px #008eff;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-duration: 1800ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: main-menu-selector-ring;
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }

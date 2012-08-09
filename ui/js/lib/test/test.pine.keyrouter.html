@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pine</title>
+    <style>
+      .output {
+        border: solid 1px #000;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Keyrouter test</h1>
+    <p>Click a button and mash on the keyboard.</p>
+    <ul>
+      <li>
+        <button>Focus here</button>
+        <div class="output"></div>
+      </li>
+      <li>
+        <button>Focus here</button>
+        <div class="output"></div>
+      </li>
+      <li>
+        <button>Focus here</button>
+        <div class="output"></div>
+      </li>
+    </ul>
+    <script src="../pine.keyrouter.js"></script>
+    <script>
+      (function () {
+        var btns = Array.prototype.slice.call(
+            document.querySelectorAll('button'), 0);
+        var keyRouter =  new KeyRouter(document.documentElement);
+
+        function createClickHandler (el) {
+          return function (ev) {
+            keyRouter.route(KeyRouter.KEYDOWN, function (ev) {
+              el.nextElementSibling.textContent += ev.which + ' ';
+            });
+          };
+        };
+
+        btns.forEach(function (el) {
+          el.addEventListener('click', createClickHandler(el), false);
+        });
+      } ());
+    </script>
+  </body>
+</html>
