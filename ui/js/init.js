@@ -28,7 +28,6 @@ require([
     }));
   });
 
-  //publish(app.constants.message.MENU_SELECTED, [app.view.menu[0].$el]);
   app.view.menu[0].focus();
 
   console.log(app);
