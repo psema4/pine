@@ -10,26 +10,37 @@ require([
     // Views
 
     ,'js/view/view.menu'
+    ,'js/view/view.menu-pager'
 
     ], function (
 
     app
-    ,menu) {
+    ,menu
+    ,menuPager) {
 
   'use strict';
 
   app.util.keyRouter = new KeyRouter(document.documentElement);
   var $menu = $('.menu');
 
+  var menuViews = [];
   $menu.each(function (i, el) {
-    app.view.menu.push(new menu.view({
+    menuViews.push(new menu.view({
       'el': $(el)
       ,'app': app
     }));
   });
 
-  app.view.menu[0].focus();
+  app.view.mainMenuPager = new menuPager.view({
+    'app': app
+    ,'$el': $('#main-menus')
+    ,'menuViews': menuViews
+  });
 
   console.log(app);
+
+  $(function () {
+    $('body').addClass('loaded');
+  });
 
 });

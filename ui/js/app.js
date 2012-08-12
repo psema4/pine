@@ -12,7 +12,7 @@ define(['js/constants'], function (constants) {
   var app = {
     'constants': constants
     ,'view': {
-      'menu': []
+      'mainMenuPager': null
     }
     ,'util': {}
   };

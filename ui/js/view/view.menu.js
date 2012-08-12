@@ -52,7 +52,7 @@ define(['exports'], function (menu) {
    * @return {number}
    */
   function getLengthOfButtonRows (menuView) {
-    var menuWidth = menuView.$el.outerWidth();
+    var menuWidth = menuView._$btnArray.outerWidth();
     var buttonWidth =  menuView.$el.find('.btn:first')
         .outerWidth(true);
 
@@ -119,11 +119,18 @@ define(['exports'], function (menu) {
 
 
     /**
-     * @param {Object} opts Must contain $el and app properties.
+     * @param {Object} opts
+     *   @param {Object} app
+     *   @param {jQuery} $el
      */
     ,'initialize': function (opts) {
       _.extend(this, opts);
+
+      /** @type {boolean} */
       this._isSelected = false;
+
+      /** @type {jQuery} */
+      this._$btnArray = this.$el.find('.menu-btn-array');
 
       subscribe(this.app.constants.message.MENU_SELECTED
         ,_.bind(this.onMenuItemSelected, this));
@@ -131,10 +138,10 @@ define(['exports'], function (menu) {
 
 
     /**
-     * @param {Object} ev
+     * @param {jQuery.Event} evt
      */
-    ,'onKeydown': function (ev) {
-      var which = ev.which;
+    ,'onKeydown': function (evt) {
+      var which = evt.which;
       if (which === this.app.constants.key.LEFT) {
         this.focusPreviousButton();
       } else if (which === this.app.constants.key.RIGHT) {
@@ -152,28 +159,28 @@ define(['exports'], function (menu) {
      */
     ,'onMenuItemSelected': function (menuItem) {
       if (menuItem === this.$el && !this._isSelected) {
-        this.focus();
+        this.activate();
       }
     }
 
 
     /**
-     * @param {Object} ev Event Object.
+     * @param {jQuery.Event} evt
      */
-    ,'onButtonFocus': function (ev) {
-      $(ev.target).addClass('selected');
+    ,'onButtonFocus': function (evt) {
+      $(evt.target).addClass('selected');
     }
 
 
     /**
-     * @param {Object} ev Event Object.
+     * @param {jQuery.Event} evt
      */
-    ,'onButtonBlur': function (ev) {
-      $(ev.target).removeClass('selected');
+    ,'onButtonBlur': function (evt) {
+      $(evt.target).removeClass('selected');
     }
 
 
-    ,'focus': function () {
+    ,'activate': function () {
       this._isSelected = true;
       this.$el.find('button:first').focus();
       this.app.util.keyRouter.route(

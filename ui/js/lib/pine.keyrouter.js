@@ -43,6 +43,15 @@
   KeyRouter.KEYPRESS = 'keypress';
 
 
+  KeyRouter.prototype.resetHandlers = function () {
+    var self = this;
+    [KeyRouter.KEYUP, KeyRouter.KEYDOWN, KeyRouter.KEYPRESS].forEach(
+        function (eventName) {
+      self.route(eventName, noop);
+    });
+  };
+
+
   /**
    * @param {string} eventName The name of the event to route.
    * @param {Function} handler The handler to receive the event.
