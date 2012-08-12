@@ -52,9 +52,10 @@ echo "modifying filesystem image"
 # stage 1
 mv ${PINE_IMGDIR}/etc/inittab ${PINE_IMGDIR}/etc/inittab.orig
 cp -av ./defaults/stage-1/etc/inittab ${PINE_IMGDIR}/etc/inittab
+cp -av ./defaults/stage-1/root/.bashrc ${PINE_IMGDIR}/root/.bashrc
 cp -rav ./defaults/stage-1/root/setup ${PINE_IMGDIR}/root
-chmod 740 ${PINE_IMGDIR}/root/setup/pine_setup.sh
-echo "/root/setup/pine_setup.sh" | cat > ${PINE_IMGDIR}/root/.bashrc
+#chmod 740 ${PINE_IMGDIR}/root/setup/pine_setup.sh
+#echo "/root/setup/pine_setup.sh" | cat > ${PINE_IMGDIR}/root/.bashrc
 
 echo ""
 echo "finalizing filesystem image"
@@ -83,7 +84,7 @@ mount -o loop,offset=${IMG_OFFSET} ${DST_IMG} ${PINE_IMGDIR}
 
 # stage 2
 cp -av ./defaults/stage-2/etc/inittab ${PINE_IMGDIR}/etc/inittab
-cp -av ./defaults/stage-2/home/pine-user/* ${PINE_IMGDIR}/home/pine-user/
+cp -av ./defaults/stage-2/home/* ${PINE_IMGDIR}/home/
 #echo "node pine.js & startx /opt/google/chrome/chrome --kiosk --disable-ipv6 --window-size=640,480 http://127.0.0.1:4444/" | cat > ${PINE_IMGDR}/home/pine-user/.bashrc
 
 echo ""
