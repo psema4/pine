@@ -87,6 +87,10 @@ define(['exports'], function (menuPager) {
       this.app.util.keyRouter.resetHandlers();
 
       this._$rail.css('left', -parseInt(targetMenu.$el.css('left'), 10));
+
+      // Need to use $.fn.one here because multiple webkitTransitionEnd events
+      // fire on the _$rail element.
+      // TODO: Figure out why that happens...
       this._$rail.one('webkitTransitionEnd',
           _.bind(targetMenu.activate, targetMenu));
     }
