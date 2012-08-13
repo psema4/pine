@@ -12,6 +12,11 @@ SRC_IMG="${WD}/pine.img"
 PINE_IMGDIR="/mnt/pine-distro-loop"         # pine filesystem mount point
 NFS_PINEDIR="/opt/pine-distro-nfs"          # nfs server's image
 
+IMG_BS=512
+IMG_START=122880
+IMG_END=3788799
+IMG_OFFSET=62914560 # IMG_BS * IMG_START
+
 # all builds
 echo "Auto Pine 0.0"
 echo "Reload NFS"

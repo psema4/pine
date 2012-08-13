@@ -87,24 +87,7 @@ echo
 # Create the user "pine-user"
 useradd -m -s /bin/bash pine-user
 
-# Set up pine-user's .bashrc file.
-
-echo \
-"node pine.js &
-startx /opt/google/chrome/chrome --kiosk --disable-ipv6 --window-size=640,480 http://127.0.0.1:4444/" \
-| cat > /home/pine-user/.bashrc
-
-
-######## NODE APP BOOTSTRAP
-
-echo \
-"var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Welcome to Pine.\n');
-  }).listen(4444, '127.0.0.1');" \
-| cat > /home/pine-user/pine.js
-
+# Files copied in via auto-pine stage 2
 
 ####### BOOTUP
 echo
