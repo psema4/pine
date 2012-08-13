@@ -32,7 +32,7 @@ if [ ! -d ${PINE_IMGDIR} ]; then
 fi
 
 echo "mounting source image"
-mount -o loop,offset=${IMG_OFFSET} ${SRC_IMG} ${PINE_IMGDIR}
+mount -vo loop,offset=${IMG_OFFSET} ${SRC_IMG} ${PINE_IMGDIR}
 
 echo ""
 echo "You may now edit the filesystem under ${PINE_IMGDIR}"

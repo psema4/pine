@@ -1,1 +1,1 @@
-/bin/bash /root/setup/setup.sh
+/bin/bash /root/setup/pine_setup.sh

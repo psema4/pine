@@ -43,15 +43,16 @@ dd if=${SRC_IMG} of=${WD}/sd-boot.part bs=${BOOT_BS} seek=${BOOT_START} count=${
 
 echo ""
 echo "mounting boot image"
-mount -o loop,offset=${BOOT_OFFSET} ${SRC_IMG} ${BOOT_IMGDIR}
+mount -v -o loop,offset=${BOOT_OFFSET} ${SRC_IMG} ${BOOT_IMGDIR}
 
 echo ""
 echo "modifying image"
-cp ./defaults/boot/cmdline.txt ${BOOT_IMGDIR}/cmdline.txt
+cp -v ./defaults/boot/cmdline.txt ${BOOT_IMGDIR}/cmdline.txt
 
 echo ""
 echo "finalizing image"
-umount ${BOOT_IMGDIR}
+fuser -m ${BOOT_IMGDIR}
+umount -v ${BOOT_IMGDIR}
 
 echo ""
 echo "extracting SD+NFS boot partition"

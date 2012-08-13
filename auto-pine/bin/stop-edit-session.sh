@@ -17,7 +17,7 @@ echo "Stop Edit Session"
 echo ""
 
 echo "finalizing filesystem image"
-umount ${PINE_IMGDIR}
+umount -v ${PINE_IMGDIR}
 
 echo ""
 echo "cleaning up mount points"

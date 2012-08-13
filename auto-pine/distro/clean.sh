@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-# restores distro to first-build state
-
-mv pine.img 2012-07-15-wheezy-raspbian.img
+# destroy existing pine images
+rm -f *.img
 rm -f *.part
+
+if [ -f ../pine.sh ]; then
+    rm ../pine.sh
+fi
+
+echo "run unpack to create a new pine distro"
