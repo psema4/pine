@@ -17,6 +17,8 @@ define(['exports'], function (constants) {
     ,'UP': 38
     ,'RIGHT': 39
     ,'DOWN': 40
+    ,'ESC': 27
+    ,'TAB': 9
     ,'Q': 81
     ,'W': 87
     ,'E': 69

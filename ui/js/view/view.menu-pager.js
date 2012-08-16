@@ -10,10 +10,6 @@ define(['exports'], function (menuPager) {
 
   var $win = $(window);
 
-
-  // PRIVATE UTILITY FUNCTIONS
-
-
   menuPager.view = Backbone.View.extend({
 
     'events': {
@@ -84,15 +80,29 @@ define(['exports'], function (menuPager) {
       var targetMenu = this.menuViews[index];
       this.$el.height(targetMenu.$el.outerHeight(true));
       this._currentMenuIndex = index;
-      this.app.util.keyRouter.resetHandlers();
 
-      this._$rail.css('left', -parseInt(targetMenu.$el.css('left'), 10));
+      // The logic gets a little tricky here because an animation may not be
+      // occurring - meaning that the element is moving to the position that it
+      // is already in.
+      var targetLeft = -parseInt(targetMenu.$el.css('left'), 10);
+      if (targetLeft === parseInt(this._$rail.css('left'), 10)) {
+        // No animation occurred, just execute the callback.
+        targetMenu.activate();
+      } else {
+        this._$rail
+          .css('left', targetLeft)
+          .off('webkitTransitionEnd')
+          // Need to use $.fn.one here because multiple webkitTransitionEnd
+          // events fire on the _$rail element.
+          // TODO: Figure out why that happens...
+          .one('webkitTransitionEnd',
+              _.bind(targetMenu.activate, targetMenu));
+      }
+    }
 
-      // Need to use $.fn.one here because multiple webkitTransitionEnd events
-      // fire on the _$rail element.
-      // TODO: Figure out why that happens...
-      this._$rail.one('webkitTransitionEnd',
-          _.bind(targetMenu.activate, targetMenu));
+
+    ,'reactivateCurrentMenu': function () {
+      this.activateMenu(this._currentMenuIndex);
     }
 
   });

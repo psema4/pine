@@ -7,9 +7,53 @@ ul {
   margin: 0;
 }
 
-.pine-container {
+#pine-container {
   padding-top: 30px;
 }
+
+/** GAME CONTAINER STYLES START */
+#game-container {
+  visibility: hidden;
+  position: fixed;
+  height: 100%;
+  left: -9999em;
+  opacity: 0;
+  top: 0;
+  width: 100%;
+  -webkit-transition: opacity;
+  -webkit-transition-duration: 400ms;
+}
+
+#game-container.playing {
+  visibility: visible;
+  left: 0;
+  opacity: 1;
+}
+
+/* This must come after #game-container.playing */
+#game-container.exiting {
+  opacity: 0;
+}
+
+  #game-container .input-proxy {
+    height: inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: inherit;
+  }
+
+    #game-container .input-proxy .key-proxy {
+      position: absolute;
+      left: -9999em;
+    }
+
+  #game-container iframe {
+    border: none;
+    height: inherit;
+    width: inherit;
+  }
+/** GAME CONTAINER STYLES END */
 
 /** MENU STYLES START */
 .main-menu {

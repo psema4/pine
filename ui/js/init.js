@@ -11,12 +11,15 @@ require([
 
     ,'js/view/view.menu'
     ,'js/view/view.menu-pager'
+    ,'js/view/view.game-init'
 
     ], function (
 
     app
+
     ,menu
-    ,menuPager) {
+    ,menuPager
+    ,gameInit) {
 
   'use strict';
 
@@ -31,10 +34,19 @@ require([
     }));
   });
 
+  var $mainMenus = $('#main-menus');
   app.view.mainMenuPager = new menuPager.view({
     'app': app
-    ,'$el': $('#main-menus')
+    ,'$el': $mainMenus
     ,'menuViews': menuViews
+  });
+
+  var $pineContainer = $('#pine-container');
+  var $gameContainer = $('#game-container');
+  app.view.gameInit = new gameInit.view({
+    'app': app
+    ,'$el': $pineContainer
+    ,'$gameContainer': $gameContainer
   });
 
   console.log(app);

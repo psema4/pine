@@ -11,7 +11,7 @@
     <link href="css/pine-animations.css" rel="stylesheet">
   </head>
   <body>
-    <div class="pine-container">
+    <div id="pine-container">
       <h1 class="welcome">Hello.  Welcome to Pine.</h1>
       <div id="main-menus" class="menu-pager">
 
@@ -19,7 +19,7 @@
           <div class="menu main-menu">
             <ul class="main-menu-btn-array menu-btn-array">
               <li>
-                <button class="btn main-menu-btn">Item 1</button>
+                <button class="btn main-menu-btn game-init" data-game-url="./iframe-test.html">iframe test</button>
               </li>
               <li>
                 <button class="btn main-menu-btn">Item 2</button>
@@ -74,7 +74,13 @@
           </div>
 
       </div>
-    </div> <!-- /pine-container -->
+    </div> <!-- /main-menus -->
+    <div id="game-container">
+      <div class="input-proxy">
+        <input class="key-proxy">
+      </div>
+      <!-- Gets filled in dynamically. -->
+    </div>
     <div id="debug-footer" class="debug">
       <p id="debug-footer-trigger">Mouse over to see debug controls.</p>
       <div class="debug-modal">
@@ -85,8 +91,13 @@
           <dt>W/E</dt>
           <dd>Change menu pages</dd>
         </dl>
+        <h2>In-game navigation</h2>
+        <dl>
+          <dt>Esc</dt>
+          <dd>Quit the game</dd>
+        </dl>
       </div>
-    </div>
+    </div> <!-- /debug-footer -->
     <script src="js/lib/jquery.js"></script>
     <script src="js/lib/bootstrap.js"></script>
     <script src="js/lib/underscore.js"></script>

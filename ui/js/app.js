@@ -13,6 +13,7 @@ define(['js/constants'], function (constants) {
     'constants': constants
     ,'view': {
       'mainMenuPager': null
+      ,'gameInit': null
     }
     ,'util': {}
   };

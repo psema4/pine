@@ -115,6 +115,7 @@ define(['exports'], function (menu) {
     'events': {
       'focus button': 'onButtonFocus'
       ,'blur button': 'onButtonBlur'
+      ,'keydown button': 'onButtonKeydown'
     }
 
 
@@ -160,6 +161,8 @@ define(['exports'], function (menu) {
     ,'onMenuItemSelected': function (menuItem) {
       if (menuItem === this.$el && !this._isSelected) {
         this.activate();
+      } else {
+        this._isSelected = false;
       }
     }
 
@@ -180,13 +183,28 @@ define(['exports'], function (menu) {
     }
 
 
-    ,'activate': function () {
-      this._isSelected = true;
-      this.$el.find('button:first').focus();
-      this.app.util.keyRouter.route(
-          KeyRouter.KEYDOWN, _.bind(this.onKeydown, this));
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,'onButtonKeydown': function (evt) {
+      if (evt.which === this.app.constants.key.TAB) {
+        evt.preventDefault();
+      }
+    }
 
-      publish(this.app.constants.message.MENU_SELECTED, [this.$el]);
+
+    ,'activate': function () {
+      // TODO: This is an inefficient check, but _isSelected wasn't working.
+      // Try to fix this.
+      if (this.$el.find('button.selected').length === 0) {
+        this._isSelected = true;
+        this.$el.find('button:first').focus();
+        this.app.util.keyRouter.resetHandlers();
+        this.app.util.keyRouter.route(
+            KeyRouter.KEYDOWN, _.bind(this.onKeydown, this));
+
+        publish(this.app.constants.message.MENU_SELECTED, [this.$el]);
+      }
     }
 
 
