@@ -12,17 +12,17 @@
   </head>
   <body>
     <div class="pine-container">
-      <h1 class="welcome">I am a test iframe!  Hello there!</h1>
+      <h1 class="welcome">I am a test iframe!  Hit some keys!</h1>
       <pre></pre>
     </div>
     <script src="js/lib/jquery.js"></script>
     <script>
     $(function () {
-      var $doc = $(document.documentElement);
+      var $win = $(this);
       var $pre = $('pre');
 
-      $doc.on('keydown', function (evt) {
-        $pre[0].innerText += evt.which + '\n';
+      $win.on('keydown', function (evt, synthesizedEvt) {
+        $pre[0].innerText += synthesizedEvt.which + '\n';
       });
     });
     </script>

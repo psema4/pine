@@ -88,6 +88,9 @@ define(['exports'], function (gameInit) {
       var which = evt.which;
       if (which === this.app.constants.key.ESC) {
         this.exitGame();
+      } else {
+        window.frames[0].$(window.frames[0].document.documentElement)
+          .trigger('keydown', [evt]);
       }
     }
 
