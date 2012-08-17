@@ -13,5 +13,18 @@
   <body>
     <div class="pine-container">
       <h1 class="welcome">I am a test iframe!  Hello there!</h1>
+      <pre></pre>
+    </div>
+    <script src="js/lib/jquery.js"></script>
+    <script>
+    $(function () {
+      var $doc = $(document.documentElement);
+      var $pre = $('pre');
+
+      $doc.on('keydown', function (evt) {
+        $pre[0].innerText += evt.which + '\n';
+      });
+    });
+    </script>
   </body>
 </html>
