@@ -90,7 +90,11 @@ define(['exports'], function (gameInit) {
       if (which === this.app.constants.key.ESC) {
         this.exitGame();
       } else {
-        window.frames[0].input.keydown(which);
+        var input = window.frames[0].input;
+        input && input.keydown(which);
+
+        // Prevents input proxy from losing focus.
+        evt.stopPropagation();
       }
     }
 
@@ -99,7 +103,12 @@ define(['exports'], function (gameInit) {
      * @param {jQuery.Event} evt
      */
     ,'onProxiedKeyup': function (evt) {
-      window.frames[0].input.keyup(evt.which);
+      var which = evt.which;
+      if (which !== this.app.constants.key.ESC) {
+        var input = window.frames[0].input;
+        input && input.keyup(which);
+        evt.stopPropagation();
+      }
     }
 
 
