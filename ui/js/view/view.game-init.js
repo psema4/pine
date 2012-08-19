@@ -32,6 +32,7 @@ define(['exports'], function (gameInit) {
       'click .game-init': 'onClickGameInit'
       ,'click #game-container.playing .input-proxy': 'onClickInputProxy'
       ,'keydown #game-container.playing .key-proxy': 'onProxiedKeydown'
+      ,'keyup #game-container.playing .key-proxy': 'onProxiedKeyup'
     }
 
 
@@ -89,9 +90,16 @@ define(['exports'], function (gameInit) {
       if (which === this.app.constants.key.ESC) {
         this.exitGame();
       } else {
-        window.frames[0].$(window.frames[0].document.documentElement)
-          .trigger('keydown', [evt]);
+        window.frames[0].input.keydown(which);
       }
+    }
+
+
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,'onProxiedKeyup': function (evt) {
+      window.frames[0].input.keyup(evt.which);
     }
 
 

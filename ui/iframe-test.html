@@ -15,16 +15,20 @@
       <h1 class="welcome">I am a test iframe!  Hit some keys!</h1>
       <pre></pre>
     </div>
-    <script src="js/lib/jquery.js"></script>
+    <script src="js/lib/pine.input.js"></script>
     <script>
-    $(function () {
-      var $win = $(this);
-      var $pre = $('pre');
+      (function (global) {
+        var pre = document.getElementsByTagName('pre')[0];
+        var input = global.input = new pine.Input();
 
-      $win.on('keydown', function (evt, synthesizedEvt) {
-        $pre[0].innerText += synthesizedEvt.which + '\n';
-      });
-    });
+        input.onKeydown(function (keycode) {
+          pre.innerText += ('keydown: ' + keycode + '\n');
+        });
+
+        input.onKeyup(function (keycode) {
+          pre.innerText += ('keyup: ' + keycode + '\n');
+        });
+      } (this));
     </script>
   </body>
 </html>
