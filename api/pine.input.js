@@ -5,6 +5,7 @@
   'use strict';
 
   var pine = global.pine = (global.pine || {});
+  function noop () {}
 
   // API:
   //   var input = new pine.Input();
@@ -20,10 +21,10 @@
   //   input.keyup(37);
   pine.Input = function () {
     /** @type {function} */
-    this._onKeydownHandler = null;
+    this._onKeydownHandler = noop;
 
     /** @type {function} */
-    this._onKeyupHandler = null;
+    this._onKeyupHandler = noop;
   };
 
 

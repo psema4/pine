@@ -7,26 +7,27 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/game.css" rel="stylesheet">
   </head>
   <body>
-    <div class="pine-container">
-      <h1 class="welcome">I am a test iframe!  Hit some keys!</h1>
-      <pre></pre>
+    <div id="game-container">
+      <h1 class="welcome">Hi!  I'm a sample game!</h1>
+      <dl id="key-list">
+        <dt data-keycode="87">W:</dt>
+        <dd></dd>
+        <dt data-keycode="65">A:</dt>
+        <dd></dd>
+        <dt data-keycode="83">S:</dt>
+        <dd></dd>
+        <dt data-keycode="68">D:</dt>
+        <dd></dd>
+      </dl>
     </div>
-    <script src="js/api/pine.input.js"></script>
     <script>
-      (function (global) {
-        var pre = document.getElementsByTagName('pre')[0];
-        var input = global.input = new pine.Input();
-
-        input.onKeydown(function (keycode) {
-          pre.innerText += ('keydown: ' + keycode + '\n');
-        });
-
-        input.onKeyup(function (keycode) {
-          pre.innerText += ('keyup: ' + keycode + '\n');
-        });
-      } (this));
+      window.isSandboxed = !(window.parent.location === window.location);
     </script>
+    <script src="js/lib/jquery.js"></script>
+    <script src="js/api/pine.input.js"></script>
+    <script src="js/src/key-input-demo.js"></script>
   </body>
 </html>
