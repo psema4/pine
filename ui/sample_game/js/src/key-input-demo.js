@@ -1,10 +1,10 @@
 ;(function (global) {
   var input = global.input = new global.pine.Input();
+  var docEl = document.documentElement;
 
   // Set up event listeners if we are running the game directly (not via the
   // Pine interface).
   if (!global.isSandboxed) {
-    var docEl = document.documentElement;
     docEl.addEventListener('keydown', function (evt) {
       input.keydown(evt.which);
     });
@@ -44,23 +44,25 @@
   });
 
 
-  $('#key-list dt').each(function (i, dt) {
-    var $dt = $(dt);
-    var $dd = $dt.next();
-    $dd.text('Not pressed');
-    var dtKeycode = $dt.data('keycode');
+  var dts = docEl.querySelectorAll('#key-list dt');
+  var dtArr = Array.prototype.slice.call(dts, 0);
+
+  dtArr.forEach(function (dt) {
+    var dd = dt.nextElementSibling;
+    dd.textContent = 'Not pressed';
+    var dtKeycode = +dt.dataset.keycode;
 
     var keydownHandlerObject = {};
     keydownHandlerObject.keycode = dtKeycode;
     keydownHandlerObject.fn = function () {
-      $dd.text('Pressed');
+      dd.textContent = 'Pressed';
     };
     keyHandlers.keydown.push(keydownHandlerObject)
 
     var keyupHandlerObject = {};
     keyupHandlerObject.keycode = dtKeycode;
     keyupHandlerObject.fn = function () {
-      $dd.text('Not pressed');
+      dd.textContent = 'Not pressed';
     };
     keyHandlers.keyup.push(keyupHandlerObject)
   });
