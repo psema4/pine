@@ -48,6 +48,7 @@
   var dtArr = Array.prototype.slice.call(dts, 0);
 
   dtArr.forEach(function (dt) {
+    var isPressed = false;
     var dd = dt.nextElementSibling;
     dd.textContent = 'Not pressed';
     var dtKeycode = +dt.dataset.keycode;
@@ -55,14 +56,20 @@
     var keydownHandlerObject = {};
     keydownHandlerObject.keycode = dtKeycode;
     keydownHandlerObject.fn = function () {
-      dd.textContent = 'Pressed';
+      if (!isPressed) {
+        dd.textContent = 'Pressed';
+      }
+      isPressed = true;
     };
     keyHandlers.keydown.push(keydownHandlerObject)
 
     var keyupHandlerObject = {};
     keyupHandlerObject.keycode = dtKeycode;
     keyupHandlerObject.fn = function () {
-      dd.textContent = 'Not pressed';
+      if (isPressed) {
+        dd.textContent = 'Not pressed';
+      }
+      isPressed = false;
     };
     keyHandlers.keyup.push(keyupHandlerObject)
   });
