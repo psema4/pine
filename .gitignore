@@ -1,3 +1,6 @@
 *.swp
 .DS_Store
 node_modules
+app/node_modules/socket.io/node_modules/socket.io-client/node_modules/uglify-js/test
+app/node_modules/mongoose/docs
+app/node_modules/mongoose/node_modules/mongodb/*.tmp
