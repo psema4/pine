@@ -4,13 +4,12 @@
   // Set up event listeners if we are running the game directly (not via the
   // Pine interface).
   if (!global.isSandboxed) {
-    $(global).on({
-      'keydown': function (evt) {
-        input.keydown(evt.which);
-      }
-      ,'keyup': function (evt) {
-        input.keyup(evt.which);
-      }
+    var docEl = document.documentElement;
+    docEl.addEventListener('keydown', function (evt) {
+      input.keydown(evt.which);
+    });
+    docEl.addEventListener('keyup', function (evt) {
+      input.keyup(evt.which);
     });
   }
 
