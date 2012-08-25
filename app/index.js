@@ -2,7 +2,6 @@
 ///      configured through environment variables if that makes it easier.
 
 // Todo: Listen to MongoDB (not sure how it will be set up, once that's figured out we can listen for it here)
-// require('mongoose')
 
 var express = require('express');
 var http = require('http');
