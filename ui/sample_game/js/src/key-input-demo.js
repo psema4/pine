@@ -1,10 +1,10 @@
-;(function (global) {
-  var input = global.input = new global.pine.Input();
+;(function (global, pine) {
+  var input = global.input = new pine.Input();
   var docEl = document.documentElement;
 
   // Set up event listeners if we are running the game directly (not via the
   // Pine interface).
-  if (!global.isSandboxed) {
+  if (!pine.env.isSandboxed) {
     docEl.addEventListener('keydown', function (evt) {
       input.keydown(evt.which);
     });
@@ -73,4 +73,4 @@
     };
     keyHandlers.keyup.push(keyupHandlerObject)
   });
-} (this));
+} (this, this.pine));
