@@ -1,8 +1,8 @@
 var methods = {};
 
 function add_methods (name) {
-  var modul = require('./' + name);
-  for (var x in modul) methods[name + '.' + x] = modul[x];
+  var module = require('./' + name);
+  for (var x in module) methods[name + '.' + x] = module[x];
 }
 
 // Add methods for each api call
