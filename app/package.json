@@ -1,0 +1,10 @@
+{
+  "name": "pine_app",
+  "version": "0.0.0",
+  "dependencies": {
+    "express": "3.0.0rc3",
+    "socket.io": "0.9.10",
+    "mongoose": "3.0.1"
+  },
+  "main": "index"
+}
