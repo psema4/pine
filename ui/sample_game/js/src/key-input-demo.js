@@ -5,11 +5,10 @@
   // Set up event listeners if we are running the game directly (not via the
   // Pine interface).
   if (!pine.env.isSandboxed) {
-    docEl.addEventListener('keydown', function (evt) {
-      input.keydown(evt.which);
-    });
-    docEl.addEventListener('keyup', function (evt) {
-      input.keyup(evt.which);
+    ['keydown', 'keyup'].forEach(function (eventName) {
+      docEl.addEventListener(eventName, function (evt) {
+        input[eventName](evt.which);
+      });
     });
   }
 
