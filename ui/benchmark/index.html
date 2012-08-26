@@ -12,8 +12,16 @@
       body {
         background: #fff;
       }
+      dt {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
     </style>
-    <h1>Pine performance test</h1>
+    <h1 id="test-name">Pine performance test</h1>
+    <dl>
+      <dt>Frames per second:</dt>
+      <dd id="framerate-output"></dd>
+    </dl>
     <script src="js/api/pine.env.js"></script>
     <script src="js/api/pine.input.js"></script>
     <script src="js/src/framerate.js"></script>
