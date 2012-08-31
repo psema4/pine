@@ -1,25 +1,13 @@
 ;(function (global, pine) {
-  var input = global.input = new pine.Input();
   var docEl = document.documentElement;
-
-  // Set up event listeners if we are running the game directly (not via the
-  // Pine interface).
-  if (!pine.env.isSandboxed) {
-    ['keydown', 'keyup'].forEach(function (eventName) {
-      docEl.addEventListener(eventName, function (evt) {
-        input[eventName](evt.which);
-      });
-    });
-  }
-
-
   var keyHandlers = {
     keydown: []
     ,keyup: []
   };
 
 
-  input.onKeydown(function (keycode) {
+  docEl.addEventListener('keydown', function (evt) {
+    var keycode = evt.which;
     var i, length = keyHandlers.keydown.length;
     for (i = 0; i < length; i++) {
       var handler = keyHandlers.keydown[i];
@@ -31,7 +19,8 @@
   });
 
 
-  input.onKeyup(function (keycode) {
+  docEl.addEventListener('keyup', function (evt) {
+    var keycode = evt.which;
     var i, length = keyHandlers.keyup.length;
     for (i = 0; i < length; i++) {
       var handler = keyHandlers.keyup[i];

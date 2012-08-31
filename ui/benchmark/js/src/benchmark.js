@@ -4,8 +4,6 @@
 
 
   var onTick = function () {};
-  var input = global.input = new pine.Input();
-
   var docEl = document.documentElement;
   var testName = document.getElementById('test-name');
   var framerateOutput = document.getElementById('framerate-output');
@@ -20,11 +18,12 @@
 
   // Set up event listeners if we are running the game directly (not via the
   // Pine interface).
-  if (!pine.env.isSandboxed) {
+  if (pine.env.isDev) {
     ['keydown', 'keyup'].forEach(function (eventName) {
       docEl.addEventListener(eventName, function (evt) {
-        input[eventName](evt.which);
-        evt.preventDefault();
+        if (evt.which === 8) { // backspace
+          evt.preventDefault();
+        }
       });
     });
   }
@@ -127,7 +126,8 @@
   //
 
   function runRotatingDivsBenchmark () {
-    input.onKeydown(function (keycode) {
+    docEl.addEventListener('keydown', function (evt) {
+      var keycode = evt.which;
       if (keycode === 32) { // space
         addRotatingDiv();
       } else if (keycode === 8) { // backspace

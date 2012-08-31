@@ -5,8 +5,25 @@
   'use strict';
 
   var pine = global.pine = (global.pine || {});
-  pine.env = {
-    'isSandboxed': !(global.parent.location === global.location)
+  var env = pine.env = {};
+
+
+  /** @type {boolean} */
+  env.isDev =  (global.parent.location === global.location)
+
+
+  pine.env.exit = function () {
+    window.location = '/';
   };
+
+
+  if (env.isDev) {
+    document.documentElement.addEventListener('keydown', function (evt) {
+      // TODO: Replace this with a constant
+      if (evt.which === 27) { // esc
+        pine.env.exit();
+      }
+    });
+  }
 
 } (this));
