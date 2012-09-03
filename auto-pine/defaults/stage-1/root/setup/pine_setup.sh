@@ -38,6 +38,18 @@ apt-get --yes --force-yes install curl xorg nodejs openssh-server git-core vim
 # Install rpi-update (https://github.com/Hexxeh/rpi-update/)
 wget http://goo.gl/1BOfJ -O /usr/bin/rpi-update && chmod +x /usr/bin/rpi-update
 
+# Install input-event-daemon
+git clone git://github.com/gandro/input-event-daemon.git /usr/local/lib/input-event-daemon
+cd /usr/local/lib/input-event-daemon
+make
+make install
+
+# TODO: Add actual config settings to this file.  This just creates it so
+# input-event-daemon doesn't error out when run.
+echo \
+"" \
+| cat > /etc/input-event-daemon.conf
+
 
 ####### INSTALL CHROMIUM
 echo
