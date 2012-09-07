@@ -60,7 +60,7 @@ useradd -m -s /bin/bash pine-user
 
 echo \
 "node pine.js &
-startx /opt/google/chrome/chrome --kiosk --disable-ipv6 --window-size=640,480 http://127.0.0.1:4444/" \
+while true; do startx /opt/google/chrome/chrome --kiosk --disable-ipv6 --window-size=640,480 http://127.0.0.1:4444/; sleep 5s; done" \
 | cat > /home/pine-user/.bashrc
 
 
