@@ -114,6 +114,16 @@ cp /etc/inittab /etc/inittab.original
 #sed -i 's/1:2345:respawn:\/sbin\/getty 38400 tty1/#1:2345:respawn:\/sbin\/getty 38400 tty1\n1:2345:respawn:\/bin\/login -f pine-user tty1 <\/dev\/tty1 >\/dev\/tty1 2>\&1/' /etc/inittab
 #perl -pi -e 's/1:2345:respawn:\/sbin\/getty 38400 tty1/#1:2345:respawn:\/sbin\/getty 38400 tty1\n1:2345:respawn:\/bin\/login -f pine-user tty1 <\/dev\/tty1 >\/dev\/tty1 2>\&1/' /etc/inittab
 
+####### INPUT DAEMON
+
+echo
+echo "*** Stage 8 ***"
+echo
+
+cd /etc/init.d/
+chmod 755 start_pine_daemons.sh
+update-rc.d start_pine_daemons.sh defaults
+
 echo
 echo "*** FINISHED***"
 echo "Reboot to run Pine"
