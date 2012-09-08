@@ -44,12 +44,6 @@ cd /usr/local/lib/input-event-daemon
 make
 make install
 
-# TODO: Add actual config settings to this file.  This just creates it so
-# input-event-daemon doesn't error out when run.
-echo \
-"" \
-| cat > /etc/input-event-daemon.conf
-
 
 ####### INSTALL CHROMIUM
 echo
@@ -119,6 +113,16 @@ cp /etc/inittab /etc/inittab.original
 echo
 echo "*** Stage 8 ***"
 echo
+
+echo \
+[Global]
+listen = /dev/input/event0
+listen = /dev/input/event1
+
+[Keys]
+ESC = sh /home/pine-user/kill_chrome.sh
+"" \
+| cat > /etc/input-event-daemon.conf
 
 cd /etc/init.d/
 chmod 755 start_pine_daemons.sh
