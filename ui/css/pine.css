@@ -124,6 +124,44 @@ ul {
 }
 /** MENU STYLES END */
 
+/** KEYBOARD STYLES START */
+.pine-keyboard-scrim {
+  background: #333;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  opacity: .5;
+  right: 0;
+  top: 0;
+}
+
+  .pine-keyboard-textarea-container {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+  }
+
+    .pine-keyboard-textarea-container textarea{
+      display: block;
+      margin: 0 auto;
+    }
+
+      .pine-keyboard-layout-grid {
+      }
+
+        .pine-keyboard-layout-grid table {
+          font-family: courier;
+          font-size: 1.4em;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+          .pine-keyboard-selected-key {
+            background: #f0f;
+          }
+
+/** KEYBOARD STYLES END */
+
 /** DEBUG STYLES START */
 #debug-footer {
   bottom: 0;

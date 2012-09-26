@@ -19,6 +19,8 @@ define(['exports'], function (constants) {
     ,'DOWN': 40
     ,'ESC': 27
     ,'TAB': 9
+    ,'ENTER': 13
+    ,'SPACE': 32
     ,'Q': 81
     ,'W': 87
     ,'E': 69
