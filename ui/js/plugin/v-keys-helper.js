@@ -28,16 +28,16 @@ define(['exports'], function (vKeysHelper) {
   };
 
 
-  /** @type {{Function(string, number)}} */
+  /** @type {{Function(ModalView, string, ?number)}} */
   vKeysHelper.specialKeyHandlers = {
-    'Enter': function (currentString) {
-      return currentString + '\n';
+    'Enter': function (modalView, currentString) {
+      modalView.updateTextarea(currentString + '\n');
     }
 
-    ,'Backspace': function (currentString, caretPosition) {
+    ,'Backspace': function (modalView, currentString, caretPosition) {
       var splitString = currentString.split('');
       splitString.splice(caretPosition - 1, 1);
-      return splitString.join('');
+      modalView.updateTextarea(splitString.join(''));
     }
   };
 

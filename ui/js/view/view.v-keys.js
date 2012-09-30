@@ -157,19 +157,20 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
   /**
    * @param {ModalView} modalView
    */
-  function inputCurrentSelectedCharacter (modalView) {
+  function invokeCurrentlySelectedKeyHandler (modalView) {
     var $selectedTd = getSelectedTd(modalView);
     var tDtext = $selectedTd.text()
     var currentTextareaContents = modalView._$textarea.text();
     var caretPosition = modalView._$textarea[0].selectionStart;
-
     var specialKeyHandler = vKeysHelper.specialKeyHandlers[tDtext];
-    var processedText = specialKeyHandler
-      ? specialKeyHandler(currentTextareaContents, caretPosition)
-      : currentTextareaContents + tDtext;
 
-    modalView._$textarea.text(processedText);
+    if (specialKeyHandler) {
+      specialKeyHandler(modalView, currentTextareaContents, caretPosition);
+    } else {
+      modalView.updateTextarea(currentTextareaContents + tDtext);
+    }
   }
+
 
   /**
    * @extends {Backbone.View}
@@ -218,7 +219,7 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
         this.hide();
       } else if (which === constants.key.ENTER
           || which === constants.key.SPACE) {
-        inputCurrentSelectedCharacter(this);
+        invokeCurrentlySelectedKeyHandler(this);
       }
 
       evt.preventDefault();
@@ -274,6 +275,14 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
         'x': 0
         ,'y': 0
       });
+    }
+
+
+    /**
+     * @param {string} newText
+     */
+    ,'updateTextarea': function (newText) {
+      this._$textarea.text(newText);
     }
 
   });
