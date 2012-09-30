@@ -167,7 +167,7 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
     if (specialKeyHandler) {
       specialKeyHandler(modalView, currentTextareaContents, caretPosition);
     } else {
-      modalView.updateTextarea(currentTextareaContents + tDtext);
+      modalView.insertTextareaContentAt(tDtext, caretPosition);
     }
   }
 
@@ -291,6 +291,20 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
      */
     ,'updateTextarea': function (newText) {
       this._$textarea.text(newText);
+    }
+
+
+    /**
+     * @param {string} char
+     * @param {number} position
+     */
+    ,'insertTextareaContentAt': function (char, position) {
+      var currentContents = this._$textarea.text();
+      var currentContentsArr = currentContents.split('');
+      currentContentsArr.splice(position, 0, char);
+      this._$textarea
+        .text(currentContentsArr.join(''))
+        .setCursorPosition(position + 1);
     }
 
   });

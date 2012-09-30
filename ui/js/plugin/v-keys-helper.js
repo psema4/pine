@@ -3,6 +3,23 @@ define(['exports'], function (vKeysHelper) {
 
   'use strict';
 
+  // This function was unabashedly copy/pasted from:
+  // http://stackoverflow.com/questions/499126/jquery-set-cursor-position-in-text-area
+  $.fn.setCursorPosition = function(pos) {
+    if ($(this).get(0).setSelectionRange) {
+      $(this).get(0).setSelectionRange(pos, pos);
+    } else if ($(this).get(0).createTextRange) {
+      var range = $(this).get(0).createTextRange();
+      range.collapse(true);
+      range.moveEnd('character', pos);
+      range.moveStart('character', pos);
+      range.select();
+    }
+
+    return this;
+  }
+
+
   /** @type {string} */
   vKeysHelper.modalTemplate = [
     '<div class="pine-keyboard">'
@@ -17,7 +34,7 @@ define(['exports'], function (vKeysHelper) {
 
   /** @type {Array.<string>} */
   var standardLayoutPartial = [
-    '1234567890    '.split('')
+    '1234567890  ⇦⇨'.split('')
     ,'!@#$%^&*-_=+[]'.split('')
     ,'{}()<>`~\\/;:\'"'.split('')
     ,['Backspace', 'Enter']
@@ -45,15 +62,19 @@ define(['exports'], function (vKeysHelper) {
 
   /** @type {{Function(ModalView, string, ?number)}} */
   vKeysHelper.specialKeyHandlers = {
-    'Enter': function (modalView, currentString) {
-      modalView.updateTextarea(currentString + '\n');
+
+    'Enter': function (modalView, currentString, caretPosition) {
+      modalView.insertTextareaContentAt('\n', caretPosition);
     }
+
 
     ,'Backspace': function (modalView, currentString, caretPosition) {
       var splitString = currentString.split('');
       splitString.splice(caretPosition - 1, 1);
       modalView.updateTextarea(splitString.join(''));
+      modalView._$textarea.setCursorPosition(caretPosition - 1);
     }
+
 
     ,'Toggle layout': function (modalView, currentString) {
       var newLayout = modalView.getCurrentLayout() === 'uppercase'
@@ -61,6 +82,17 @@ define(['exports'], function (vKeysHelper) {
         : 'uppercase';
       modalView.switchLayout(newLayout);
     }
+
+
+    ,'⇦': function (modalView, currentString, caretPosition) {
+      modalView._$textarea.setCursorPosition(caretPosition - 1);
+    }
+
+
+    ,'⇨': function (modalView, currentString, caretPosition) {
+      modalView._$textarea.setCursorPosition(caretPosition + 1);
+    }
+
   };
 
 
