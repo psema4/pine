@@ -15,17 +15,31 @@ define(['exports'], function (vKeysHelper) {
   ].join('');
 
 
+  /** @type {Array.<string>} */
+  var standardLayoutPartial = [
+    '1234567890    '.split('')
+    ,'!@#$%^&*-_=+[]'.split('')
+    ,'{}()<>`~\\/;:\'"'.split('')
+    ,['Backspace', 'Enter']
+  ];
+
+
   // Sorry about this nonsensical typedef...
   /** @type {{<Array.<Array.<string>>>}} */
   vKeysHelper.layouts = {
     'uppercase':
       ['ABCDEFGHIJKLMN'.split('')
-      ,'OPQRSTUVWXYZ  '.split('')
-      ,'1234567890    '.split('')
-      ,'!@#$%^&*-_=+[]'.split('')
-      ,'{}()<>`~\\/;:\'"'.split('')
-      ,['Backspace', 'Enter']]
+      ,'OPQRSTUVWXYZ  '.split('')]
+
+    ,'lowercase':
+      ['abcdefghijklmn'.split('')
+      ,'opqrstuvwxyz  '.split('')]
   };
+
+  _.each(vKeysHelper.layouts, function (layout, layoutName) {
+    vKeysHelper.layouts[layoutName] =
+        vKeysHelper.layouts[layoutName].concat(standardLayoutPartial);
+  });
 
 
   /** @type {{Function(ModalView, string, ?number)}} */
