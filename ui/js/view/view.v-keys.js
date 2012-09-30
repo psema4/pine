@@ -202,6 +202,14 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
 
 
     /**
+     * @return {string}
+     */
+    ,'getCurrentLayout': function getCurrentLayout () {
+      return this._currentLayout;
+    }
+
+
+    /**
      * @param {jQuery.Event} evt
      */
     ,'onKeydown': function (evt) {

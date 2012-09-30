@@ -21,6 +21,7 @@ define(['exports'], function (vKeysHelper) {
     ,'!@#$%^&*-_=+[]'.split('')
     ,'{}()<>`~\\/;:\'"'.split('')
     ,['Backspace', 'Enter']
+    ,['Toggle layout']
   ];
 
 
@@ -52,6 +53,13 @@ define(['exports'], function (vKeysHelper) {
       var splitString = currentString.split('');
       splitString.splice(caretPosition - 1, 1);
       modalView.updateTextarea(splitString.join(''));
+    }
+
+    ,'Toggle layout': function (modalView, currentString) {
+      var newLayout = modalView.getCurrentLayout() === 'uppercase'
+        ? 'lowercase'
+        : 'uppercase';
+      modalView.switchLayout(newLayout);
     }
   };
 
