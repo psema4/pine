@@ -38,6 +38,7 @@ define(['exports'], function (vKeysHelper) {
     ,'!@#$%^&*-_=+[]'.split('')
     ,'{}()<>`~\\/;:\'"'.split('')
     ,['Backspace', 'Enter']
+    ,['Cancel', 'Accept']
     ,['Toggle layout']
   ];
 
@@ -81,6 +82,16 @@ define(['exports'], function (vKeysHelper) {
         ? 'lowercase'
         : 'uppercase';
       modalView.switchLayout(newLayout);
+    }
+
+
+    ,'Cancel': function (modalView, currentString, caretPosition) {
+      modalView.hide();
+    }
+
+
+    ,'Accept': function (modalView, currentString, caretPosition) {
+      modalView.hide(true);
     }
 
 

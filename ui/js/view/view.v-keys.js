@@ -186,6 +186,9 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
       /** @type {string} */
       this._currentLayout = '';
 
+      /** @type {string} */
+      this._proxiedElText = null;
+
       /** @type {jQuery} */
       this._$proxiedEl = null;
 
@@ -223,8 +226,6 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
         goLeft(this);
       } else if (which === constants.key.RIGHT) {
         goRight(this);
-      } else if (which === constants.key.ESC) {
-        this.hide();
       } else if (which === constants.key.ENTER
           || which === constants.key.SPACE) {
         invokeCurrentlySelectedKeyHandler(this);
@@ -246,7 +247,8 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
 
     ,'show': function () {
       if (this._$proxiedEl) {
-        this._$textarea.text(this._$proxiedEl.val());
+        this._proxiedElText = this._$proxiedEl.val();
+        this._$textarea.text(this._proxiedElText);
       }
 
       this.$el.css('display', 'block');
@@ -254,8 +256,11 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
     }
 
 
-    ,'hide': function () {
-      if (this._$proxiedEl) {
+    /**
+     * @param {boolean} updateProxiedEl
+     */
+    ,'hide': function (updateProxiedEl) {
+      if (updateProxiedEl && this._$proxiedEl) {
         this._$proxiedEl.val(this._$textarea.text());
       }
 
