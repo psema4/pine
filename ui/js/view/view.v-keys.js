@@ -173,6 +173,14 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
 
 
   /**
+   * @param {jQuery.<HTMLTextAreaElement>} $textarea
+   */
+  function updateTextareaState($textarea) {
+    $textarea.text($textarea.val());
+  }
+
+
+  /**
    * @extends {Backbone.View}
    * @constructor
    */
@@ -180,6 +188,7 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
 
     'events': {
       'keydown': 'onKeydown'
+      ,'keyup': 'onKeyup'
     }
 
     ,'initialize': function (opts) {
@@ -220,18 +229,28 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
 
       if (which === constants.key.UP) {
         goUp(this);
+        evt.preventDefault();
       } else if (which === constants.key.DOWN) {
         goDown(this);
+        evt.preventDefault();
       } else if (which === constants.key.LEFT) {
         goLeft(this);
+        evt.preventDefault();
       } else if (which === constants.key.RIGHT) {
         goRight(this);
-      } else if (which === constants.key.ENTER
-          || which === constants.key.SPACE) {
+        evt.preventDefault();
+      } else if (which === constants.key.ENTER) {
         invokeCurrentlySelectedKeyHandler(this);
+        evt.preventDefault();
       }
+    }
 
-      evt.preventDefault();
+
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,'onKeyup': function (evt) {
+      updateTextareaState(this._$textarea);
     }
 
 
@@ -308,7 +327,7 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
       var currentContentsArr = currentContents.split('');
       currentContentsArr.splice(position, 0, char);
       this._$textarea
-        .text(currentContentsArr.join(''))
+        .val(currentContentsArr.join(''))
         .setCursorPosition(position + 1);
     }
 
