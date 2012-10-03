@@ -136,6 +136,8 @@ ul {
 }
 
   .pine-keyboard-textarea-container {
+    font-size: 1.4em;
+    left: 0;
     position: absolute;
     top: 30%;
     width: 100%;
@@ -143,22 +145,23 @@ ul {
 
     .pine-keyboard-textarea-container textarea{
       display: block;
+      font-size: inherit;
+      height: 4.2em;
       margin: 0 auto;
     }
 
-      .pine-keyboard-layout-grid {
+    .pine-keyboard-layout-grid {
+    }
+
+      .pine-keyboard-layout-grid table {
+        font-family: courier;
+        margin: 0 auto;
+        text-align: center;
       }
 
-        .pine-keyboard-layout-grid table {
-          font-family: courier;
-          font-size: 1.4em;
-          margin: 0 auto;
-          text-align: center;
+        .pine-keyboard-selected-key {
+          background: #f0f;
         }
-
-          .pine-keyboard-selected-key {
-            background: #f0f;
-          }
 
 /** KEYBOARD STYLES END */
 
