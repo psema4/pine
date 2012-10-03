@@ -267,7 +267,8 @@ define(['exports', './../plugin/v-keys-helper', './../constants']
     ,'show': function () {
       if (this._$proxiedEl) {
         this._proxiedElText = this._$proxiedEl.val();
-        this._$textarea.text(this._proxiedElText);
+        this._$textarea.val(this._proxiedElText);
+        updateTextareaState(this._$textarea);
       }
 
       this.$el.css('display', 'block');
