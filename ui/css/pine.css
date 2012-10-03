@@ -154,9 +154,24 @@ ul {
     }
 
       .pine-keyboard-layout-grid table {
+        border-radius: 5px;
         font-family: courier;
-        margin: 0 auto;
+        margin: 20px auto 0;
+        padding: 14px;
         text-align: center;
+
+        /** From: http://www.colorzilla.com/gradient-editor/ */
+        background: -moz-linear-gradient(top,  #f0f9ff 0%, #d3d3d3 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f9ff), color-stop(100%,#d3d3d3)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #f0f9ff 0%,#d3d3d3 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #f0f9ff 0%,#d3d3d3 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #f0f9ff 0%,#d3d3d3 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  #f0f9ff 0%,#d3d3d3 100%); /* W3C */
+
+        /** From: http://css3gen.com/box-shadow/ */
+        -webkit-box-shadow: 1px 0px 20px rgba(50, 50, 50, 0.8);
+        -moz-box-shadow:    1px 0px 20px rgba(50, 50, 50, 0.8);
+        box-shadow:         1px 0px 20px rgba(50, 50, 50, 0.8);
       }
 
         .pine-keyboard-selected-key {
