@@ -115,13 +115,12 @@ echo "*** Stage 8 ***"
 echo
 
 echo \
-[Global]
+"[Global]
 listen = /dev/input/event0
 listen = /dev/input/event1
 
 [Keys]
-ESC = sh /home/pine-user/kill_chrome.sh
-"" \
+ESC = sh /home/pine-user/kill_chrome.sh" \
 | cat > /etc/input-event-daemon.conf
 
 cd /etc/init.d/
