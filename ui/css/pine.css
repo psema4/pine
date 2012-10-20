@@ -3,6 +3,7 @@
  * Box shadows from: http://css3gen.com/box-shadow/
  **/
 h1.welcome {
+  margin-bottom: 40px;
   text-align: center;
 }
 
@@ -61,13 +62,15 @@ ul {
 
 /** MENU STYLES START */
 .main-menu {
-  margin: 40px auto 0;
-  width: 100%;
+  margin: auto 0;
+  overflow: hidden;
+  vertical-align: top;
 }
 
   .main-menu .main-menu-btn-array {
     margin: 0 auto;
     overflow: auto;
+    position: relative;
     width: 960px;
   }
 

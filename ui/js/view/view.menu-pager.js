@@ -27,17 +27,10 @@ define(['exports'], function (menuPager) {
       _.extend(this, opts);
 
       /** @type {number} */
-      this._currentMenuIndex = null;
+      this._currentMenuIndex = 0;
 
       /** @type {jQuery} */
       this._$rail = this.$el.find('.menu-pager-rail');
-
-      _.each(this.menuViews, function (menuView, i) {
-        menuView.$el.css({
-          'position': 'absolute'
-          ,'top': 0
-        });
-      }, this);
 
       this._onWindowResize();
       $win.on('resize', _.bind(this._onWindowResize, this));
@@ -47,14 +40,14 @@ define(['exports'], function (menuPager) {
 
     /**
      * @param {jQuery.Event} evt
+     * TODO: This method does not need to be part of the View, it should just
+     * be private.
      */
     ,'_onWindowResize': function (evt) {
-      this.$el.width($win.width());
-      _.each(this.menuViews, function (menuView, i) {
-        menuView.$el.css({
-          'left': i * $win.width()
-        });
-      }, this);
+      var windowWidth = $win.width();
+      this.$el.width(windowWidth);
+      this._$rail.width(windowWidth * this.menuViews.length);
+      this.$el.height(this.getCurrentMenu().getViewportHeight());
     }
 
 
@@ -78,13 +71,13 @@ define(['exports'], function (menuPager) {
       index = Math.max(index, 0);
       index = Math.min(index, this.menuViews.length - 1);
       var targetMenu = this.menuViews[index];
-      this.$el.height(targetMenu.$el.outerHeight(true));
+      targetMenu.resetPosition();
       this._currentMenuIndex = index;
 
       // The logic gets a little tricky here because an animation may not be
       // occurring - meaning that the element is moving to the position that it
       // is already in.
-      var targetLeft = -parseInt(targetMenu.$el.css('left'), 10);
+      var targetLeft = -targetMenu.$el.position().left;
       if (targetLeft === parseInt(this._$rail.css('left'), 10)) {
         // No animation occurred, just execute the callback.
         targetMenu.activate();
@@ -98,6 +91,11 @@ define(['exports'], function (menuPager) {
           .one('webkitTransitionEnd',
               _.bind(targetMenu.activate, targetMenu));
       }
+    }
+
+
+    ,'getCurrentMenu': function () {
+      return this.menuViews[this._currentMenuIndex];
     }
 
 

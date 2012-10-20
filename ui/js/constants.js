@@ -24,6 +24,10 @@ define(['exports'], function (constants) {
     ,'Q': 81
     ,'W': 87
     ,'E': 69
+    ,'H': 72
+    ,'J': 74
+    ,'K': 75
+    ,'L': 76
   }
 
 });

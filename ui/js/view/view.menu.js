@@ -9,7 +9,9 @@ define(['exports'], function (menu) {
   'use strict';
 
 
-  // PRIVATE UTILITY FUNCTIONS
+  // PRIVATE UTILITIES
+
+  var $win = $(window);
 
   /**
    * @param {Backbone.View} menuView
@@ -22,6 +24,33 @@ define(['exports'], function (menu) {
 
   /**
    * @param {Backbone.View} menuView
+   * @param {jQuery} targetBtn
+   */
+  function focusTargetButton (menuView, targetBtn) {
+    // This function is completely insane.  I'm sorry.
+    var targetBtnTop = targetBtn.offset().top;
+    var targetBtnBottom = targetBtnTop + targetBtn.outerHeight(true);
+    var menuViewTop = menuView._$containingRail.offset().top;
+    var menuViewBottom = menuViewTop +
+        menuView._$containingRail.outerHeight(true);
+    var isBtnAbove = targetBtnTop < menuViewTop;
+    var isBtnBelow = targetBtnBottom > menuViewBottom;
+    var targetBtnNegativeTop = -targetBtn.position().top;
+
+    if (isBtnAbove) {
+      menuView._$btnArray.css('top', targetBtnNegativeTop);
+    } else if (isBtnBelow) {
+      menuView._$btnArray.css('top', targetBtnNegativeTop +
+          menuView._$containingRail.height() -
+          targetBtn.parent().outerHeight(true));
+    }
+
+    targetBtn.focus();
+  }
+
+
+  /**
+   * @param {Backbone.View} menuView
    * @param {string} nextOrPrev Must be "next" or "prev"
    */
   function focusNextOrPreviousButton (menuView, nextOrPrev) {
@@ -29,21 +58,21 @@ define(['exports'], function (menu) {
     var parentLi = currentBtn.parent('li');
     //TODO: Find a faster way to select the next or previous button.
     var nextOrPrevBtn = parentLi[nextOrPrev]().find('button');
+    var targetBtn;
 
     if (nextOrPrevBtn.length) {
-      nextOrPrevBtn.focus();
+      targetBtn = nextOrPrevBtn;
     } else {
       var parentUl = parentLi.parent();
 
-      var targetBtn;
       if (nextOrPrev === 'next') {
         targetBtn = parentUl.find('button:first');
       } else {
         targetBtn = parentUl.find('button:last');
       }
-
-      targetBtn.focus();
     }
+
+    focusTargetButton(menuView, targetBtn);
   }
 
 
@@ -80,6 +109,17 @@ define(['exports'], function (menu) {
 
   /**
    * @param {Backbone.View} menuView
+   */
+  function fitMenuToScreen (menuView) {
+    var top = menuView._$containingRail.offset().top;
+    var bottom = $win.height();
+    var freeSpace = bottom - top;
+    menuView.$el.height(freeSpace);
+  }
+
+
+  /**
+   * @param {Backbone.View} menuView
    * @param {string} aboveOrBelow Must be "above" or "below"
    */
   function jumpRow (menuView, aboveOrBelow) {
@@ -106,7 +146,8 @@ define(['exports'], function (menu) {
       }
     }
 
-    btnList.eq(targetBtnIndex).focus();
+    var targetBtn = btnList.eq(targetBtnIndex);
+    focusTargetButton(menuView, targetBtn);
   }
 
 
@@ -133,6 +174,16 @@ define(['exports'], function (menu) {
       /** @type {jQuery} */
       this._$btnArray = this.$el.find('.menu-btn-array');
 
+      // TODO: This View should NOT be concerned with the .menu-pager element.
+      // This is a huge architectural flaw and the relationship between DOM
+      // elements needs to rethought.  Get rid of this property and anything
+      // that uses it.
+      /** @type {jQuery} */
+      this._$containingRail = this.$el.parents('.menu-pager');
+
+      fitMenuToScreen(this);
+      $win.on('resize', _.bind(fitMenuToScreen, null, this));
+
       subscribe(this.app.constants.message.MENU_SELECTED
         ,_.bind(this.onMenuItemSelected, this));
     }
@@ -143,13 +194,17 @@ define(['exports'], function (menu) {
      */
     ,'onKeydown': function (evt) {
       var which = evt.which;
-      if (which === this.app.constants.key.LEFT) {
+      if (which === this.app.constants.key.LEFT
+          || which === this.app.constants.key.H) {
         this.focusPreviousButton();
-      } else if (which === this.app.constants.key.RIGHT) {
+      } else if (which === this.app.constants.key.RIGHT
+          || which === this.app.constants.key.L) {
         this.focusNextButton();
-      } else if (which === this.app.constants.key.UP) {
+      } else if (which === this.app.constants.key.UP
+          || which === this.app.constants.key.K) {
         this.focusAboveButton();
-      } else if (which === this.app.constants.key.DOWN) {
+      } else if (which === this.app.constants.key.DOWN
+          || which === this.app.constants.key.J) {
         this.focusBelowButton();
       }
     }
@@ -193,6 +248,25 @@ define(['exports'], function (menu) {
     }
 
 
+    ,'getViewportHeight': function () {
+      var children = this._$btnArray.children();
+      var menuViewTop = this.$el.offset().top;
+      var menuViewBottom = $win.height();
+
+      var currentChild, childHeight, i = children.length - 1;
+      for (i; i > 0; i--) {
+        currentChild = children.eq(i);
+        childHeight = currentChild.outerHeight(true);
+        var childBottom = currentChild.position().top + childHeight;
+        if (childBottom <= menuViewBottom) {
+          break;
+        }
+      }
+
+      return childBottom - currentChild.outerHeight(true);
+    }
+
+
     ,'activate': function () {
       // TODO: This is an inefficient check, but _isSelected wasn't working.
       // Try to fix this.
@@ -205,6 +279,11 @@ define(['exports'], function (menu) {
 
         publish(this.app.constants.message.MENU_SELECTED, [this.$el]);
       }
+    }
+
+
+    ,'resetPosition': function () {
+      this._$btnArray.css('top', 0);
     }
 
 
