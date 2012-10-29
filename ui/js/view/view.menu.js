@@ -273,6 +273,7 @@ define(['exports'], function (menu) {
       if (this.$el.find('button.selected').length === 0) {
         this._isSelected = true;
         this.$el.find('button:first').focus();
+        // TODO: This probably isn't needed anymore.
         this.app.util.keyRouter.resetHandlers();
         this.app.util.keyRouter.route(
             KeyRouter.KEYDOWN, _.bind(this.onKeydown, this));
@@ -304,6 +305,11 @@ define(['exports'], function (menu) {
 
     ,'focusBelowButton': function () {
       jumpRow(this, 'below');
+    }
+
+
+    ,'clickCurrentButton': function () {
+      getCurrentButton(this).click();
     }
 
   });

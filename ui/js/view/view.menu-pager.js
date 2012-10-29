@@ -10,6 +10,48 @@ define(['exports'], function (menuPager) {
 
   var $win = $(window);
 
+
+  /**
+   * @param {Backbone.View} menuPager
+   */
+  function gamepadTick (menuPager) {
+    setTimeout(function () {
+      gamepadTick(menuPager);
+    }, 100);
+
+    var menuView = menuPager.getCurrentMenu();
+    var key, downKeys = pine.gamepad.downKeys;
+    for (key in downKeys) {
+      if (downKeys.hasOwnProperty(key)) {
+        switch (key) {
+          case 'LEFT':
+            menuView.focusPreviousButton();
+            break;
+          case 'RIGHT':
+            menuView.focusNextButton();
+            break;
+          case 'UP':
+            menuView.focusAboveButton();
+            break;
+          case 'DOWN':
+            menuView.focusBelowButton();
+            break;
+          case 'L1':
+          case 'L2':
+            menuPager.activatePreviousMenu();
+            break;
+          case 'R1':
+          case 'R2':
+            menuPager.activateNextMenu();
+            break;
+          case 'B':
+            menuView.clickCurrentButton();
+            break;
+        }
+      }
+    }
+  }
+
   menuPager.view = Backbone.View.extend({
 
     'events': {
@@ -35,6 +77,8 @@ define(['exports'], function (menuPager) {
       this._onWindowResize();
       $win.on('resize', _.bind(this._onWindowResize, this));
       this.activateMenu(0);
+
+      gamepadTick(this);
     }
 
 
@@ -57,9 +101,9 @@ define(['exports'], function (menuPager) {
     ,'onKeydown': function (evt) {
       var which = evt.which;
       if (which === this.app.constants.key.W) {
-        this.activateMenu(this._currentMenuIndex - 1);
+        this.activateNextMenu();
       } else if (which === this.app.constants.key.E) {
-        this.activateMenu(this._currentMenuIndex + 1);
+        this.activatePreviousMenu();
       }
     }
 
@@ -91,6 +135,16 @@ define(['exports'], function (menuPager) {
           .one('webkitTransitionEnd',
               _.bind(targetMenu.activate, targetMenu));
       }
+    }
+
+
+    ,'activatePreviousMenu': function () {
+      this.activateMenu(this._currentMenuIndex - 1);
+    }
+
+
+    ,'activateNextMenu': function () {
+      this.activateMenu(this._currentMenuIndex + 1);
     }
 
 
