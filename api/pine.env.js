@@ -8,8 +8,11 @@
   var env = pine.env = {};
 
 
-  /** @type {boolean} */
-  env.isDev =  (global.parent.location === global.location)
+  /**
+   * Adding "dev=1" to the URL query string invokes Developer Mode.
+   * @type {boolean}
+   **/
+  env.isDev =  !!location.toString().match(/\?(.*dev\=1)/)
 
 
   pine.env.exit = function () {
