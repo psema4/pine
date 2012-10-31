@@ -6,3 +6,6 @@ require('http').createServer(function (request, response) {
     file.serve(request, response);
   });
 }).listen(5000);
+
+console.log('Pine dev server is now listening on port 5000.');
+console.log('Press ctrl+c to kill the server.');
