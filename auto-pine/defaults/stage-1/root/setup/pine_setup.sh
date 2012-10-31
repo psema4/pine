@@ -38,6 +38,12 @@ apt-get --yes --force-yes install curl xorg nodejs openssh-server git-core vim
 # Install rpi-update (https://github.com/Hexxeh/rpi-update/)
 wget http://goo.gl/1BOfJ -O /usr/bin/rpi-update && chmod +x /usr/bin/rpi-update
 
+# Install input-event-daemon
+git clone git://github.com/gandro/input-event-daemon.git /usr/local/lib/input-event-daemon
+cd /usr/local/lib/input-event-daemon
+make
+make install
+
 
 ####### INSTALL CHROMIUM
 echo
@@ -101,6 +107,25 @@ cp /etc/inittab /etc/inittab.original
 
 #sed -i 's/1:2345:respawn:\/sbin\/getty 38400 tty1/#1:2345:respawn:\/sbin\/getty 38400 tty1\n1:2345:respawn:\/bin\/login -f pine-user tty1 <\/dev\/tty1 >\/dev\/tty1 2>\&1/' /etc/inittab
 #perl -pi -e 's/1:2345:respawn:\/sbin\/getty 38400 tty1/#1:2345:respawn:\/sbin\/getty 38400 tty1\n1:2345:respawn:\/bin\/login -f pine-user tty1 <\/dev\/tty1 >\/dev\/tty1 2>\&1/' /etc/inittab
+
+####### INPUT DAEMON
+
+echo
+echo "*** Stage 8 ***"
+echo
+
+echo \
+"[Global]
+listen = /dev/input/event0
+listen = /dev/input/event1
+
+[Keys]
+ESC = sh /home/pine-user/kill_chrome.sh" \
+| cat > /etc/input-event-daemon.conf
+
+cd /etc/init.d/
+chmod 755 start_pine_daemons.sh
+update-rc.d start_pine_daemons.sh defaults
 
 echo
 echo "*** FINISHED***"
