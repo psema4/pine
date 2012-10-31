@@ -45,6 +45,12 @@
         }
       }
     }
+
+    // Users can exit the game by hitting L1 + R1 + START.
+    if (pine.env &&
+        'START' in downKeys && 'L1' in downKeys && 'R1' in downKeys) {
+      pine.env.exit();
+    }
   }
 
   global.webkitRequestAnimationFrame(tick);
