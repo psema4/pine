@@ -112,6 +112,14 @@
 
 
   function rotatingDivsBenchmarkOnTick () {
+    if (pine.gamepad.downKeys.R1) {
+      addRotatingDiv();
+    }
+
+    if (pine.gamepad.downKeys.L1) {
+      removeRotatingDiv();
+    }
+
     var childrenArr = getChildren(scratch);
     childrenArr.forEach(function (child) {
       var currentTransform = child.style.webkitTransform;
