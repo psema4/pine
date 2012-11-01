@@ -17,11 +17,11 @@
       var pad = gamepads[padindex];
       var i;
       if (!pad) continue;
-      data += '<pre>' + pad.index + ": " + pad.id + "<br/>";
+      data += '<pre>controller ' + pad.index + ": \"" + pad.id + "\"<br/>";
       for (i = 0; i < pad.buttons.length; ++i)
-        data += "button" + i + ": " + pad.buttons[i] + "<br/>";
+        data += "button " + i + ": " + pad.buttons[i] + "<br/>";
       for (i = 0; i < pad.axes.length; ++i)
-        data += "axis" + i + ": " + pad.axes[i] + "<br/>";
+        data += "axis " + i + ": " + pad.axes[i] + "<br/>";
     }
     document.body.innerHTML = data;
   }
