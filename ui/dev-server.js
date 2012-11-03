@@ -1,13 +1,14 @@
+var fs = require('fs');
 var express = require('express');
 var server = express();
 
-server.use(express.static(__dirname + '/'));
-server.use('/public', express.static(__dirname + '/public'));
+server.get('/', function (req, res) {
+  var html = fs.readFileSync(__dirname + '/index.html', 'utf8');
+  res.send(html);
+});
 
-//TODO(jeremyckahn): Serving the api/ directory like this is a little silly.  I
-//tried to symlink it in the public/ directory, but it wasn't working for
-//whatever reason.  This might be a limitation of Express.  Try to straighten
-//this out.
+server.use('/public', express.static(__dirname + '/public'));
+server.use('/packages', express.static(__dirname + '/packages'));
 server.use('/api', express.static(__dirname + '/../api'));
 
 server.listen(5000);
