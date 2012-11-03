@@ -10,7 +10,7 @@
     "url": "https://github.com/jeremyckahn/pine.git"
   },
   "devDependencies": {
-    "node-static": "*"
+    "express": "*"
   },
   "author": "Jeremy Kahn"
 }
