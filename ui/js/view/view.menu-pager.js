@@ -100,9 +100,9 @@ define(['exports'], function (menuPager) {
      */
     ,'onKeydown': function (evt) {
       var which = evt.which;
-      if (which === this.app.constants.key.W) {
+      if (which === this.app.constants.key.E) {
         this.activateNextMenu();
-      } else if (which === this.app.constants.key.E) {
+      } else if (which === this.app.constants.key.W) {
         this.activatePreviousMenu();
       }
     }
