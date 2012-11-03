@@ -1,0 +1,233 @@
+/**
+ * Gradients from: http://www.colorzilla.com/gradient-editor/
+ * Box shadows from: http://css3gen.com/box-shadow/
+ **/
+h1.welcome {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+#pine-container {
+  padding-top: 30px;
+}
+
+/** GAME CONTAINER STYLES START */
+#game-container {
+  visibility: hidden;
+  position: fixed;
+  height: 100%;
+  left: -9999em;
+  opacity: 0;
+  top: 0;
+  width: 100%;
+  -webkit-transition: opacity;
+  -webkit-transition-duration: 400ms;
+}
+
+#game-container.playing {
+  visibility: visible;
+  left: 0;
+  opacity: 1;
+}
+
+/* This must come after #game-container.playing */
+#game-container.exiting {
+  opacity: 0;
+}
+
+  #game-container .input-proxy {
+    height: inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: inherit;
+  }
+
+    #game-container .input-proxy .key-proxy {
+      position: absolute;
+      left: -9999em;
+    }
+
+  #game-container iframe {
+    border: none;
+    height: inherit;
+    width: inherit;
+  }
+/** GAME CONTAINER STYLES END */
+
+/** MENU STYLES START */
+.main-menu {
+  margin: auto 0;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+  .main-menu .main-menu-btn-array {
+    margin: 0 auto;
+    overflow: auto;
+    position: relative;
+    width: 960px;
+  }
+
+    .main-menu .main-menu-btn-array li {
+      float: left;
+      margin: 0 25px 35px;
+    }
+
+    .main-menu.wide .main-menu-btn-array li {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+
+  .main-menu .main-menu-btn {
+    border-radius: 30px;
+    font-size: 34px;
+    height: 120px;
+    line-height: 1.25em;
+    width: 260px;
+  }
+
+  .main-menu.wide .main-menu-btn {
+    width: 100%;
+  }
+
+  .main-menu .main-menu-btn.selected,
+  .main-menu .main-menu-btn:focus {
+    outline: none;
+    -webkit-box-shadow: inset 0 0 12px 2px #008eff;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-duration: 1800ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: main-menu-selector-ring;
+    -webkit-animation-timing-function: cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  }
+
+.menu-pager {
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  width: 960px;
+}
+
+  .menu-pager .menu-pager-rail {
+    position: relative;
+    -webkit-transition: left;
+    -webkit-transition-duration: 350ms;
+  }
+
+#main-menus {
+  opacity: 0;
+}
+
+.loaded #main-menus {
+  opacity: 1;
+  -webkit-transition: opacity;
+  -webkit-transition-duration: 750ms;
+}
+/** MENU STYLES END */
+
+/** KEYBOARD STYLES START */
+.pine-keyboard-scrim {
+  background: #333;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  opacity: .5;
+  right: 0;
+  top: 0;
+}
+
+  .pine-keyboard-textarea-container {
+    font-size: 1.4em;
+    left: 0;
+    position: absolute;
+    top: 30%;
+    width: 100%;
+  }
+
+    .pine-keyboard-textarea-container textarea{
+      display: block;
+      font-size: inherit;
+      height: 4.2em;
+      margin: 0 auto;
+    }
+
+    .pine-keyboard-layout-grid {
+    }
+
+      .pine-keyboard-layout-grid table {
+        border-radius: 5px;
+        font-family: courier;
+        margin: 20px auto 0;
+        padding: 14px;
+        text-align: center;
+
+        background: -moz-linear-gradient(top,  #f0f9ff 0%, #d3d3d3 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f9ff), color-stop(100%,#d3d3d3)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #f0f9ff 0%,#d3d3d3 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #f0f9ff 0%,#d3d3d3 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #f0f9ff 0%,#d3d3d3 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  #f0f9ff 0%,#d3d3d3 100%); /* W3C */
+
+        -webkit-box-shadow: 1px 0px 20px rgba(50, 50, 50, 0.8);
+        -moz-box-shadow:    1px 0px 20px rgba(50, 50, 50, 0.8);
+        box-shadow:         1px 0px 20px rgba(50, 50, 50, 0.8);
+      }
+
+        .pine-keyboard-selected-key {
+          background: rgba(0, 200, 255, 1);
+
+          -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 200, 255, 1);
+          -moz-box-shadow:    0px 0px 3px 3px rgba(0, 200, 255, 1);
+          box-shadow:         0px 0px 3px 3px rgba(0, 200, 255, 1);
+        }
+
+/** KEYBOARD STYLES END */
+
+/** DEBUG STYLES START */
+#debug-footer {
+  bottom: 0;
+  padding-left: 8px;
+  position: fixed;
+  left: 0;
+}
+
+  #debug-footer .debug-modal {
+    display: none;
+  }
+
+  #debug-footer-trigger:hover + .debug-modal {
+    display: block;
+  }
+
+.debug-modal {
+  background: #000;
+  border-radius: 6px;
+  bottom: 5%;
+  color: #fff;
+  left: 5%;
+  opacity: .95;
+  padding: 30px;
+  position: fixed;
+  right: 5%;
+  top: 5%;
+}
+
+  .debug-modal dl {
+    padding-left: 1em;
+  }
+
+  .debug-modal dt {
+    font-size: 1.2em;
+  }
+
+  .debug-modal dd {
+    margin-bottom: 1em;
+  }
+/** DEBUG STYLES END */

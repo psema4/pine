@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="../qunit/qunit.css" rel="stylesheet" type="text/css" />
+  <script src="../qunit/qunit.js"></script>
+  <script src="../pine.input.js"></script>
+  <script>
+  (function () {
+
+    module('onKeydown');
+
+
+    test('Can bind a keydown handler',
+        function () {
+
+      var input = new pine.Input();
+      var handler = function () {};
+      input.onKeydown(handler);
+      equal(input._onKeydownHandler, handler,
+          'The handler function is stored internally');
+    });
+
+
+    module('onKeyup');
+
+
+    test('Can bind a keyup handler',
+        function () {
+
+      var input = new pine.Input();
+      var handler = function () {};
+      input.onKeyup(handler);
+      equal(input._onKeyupHandler, handler,
+          'The handler function is stored internally');
+    });
+
+
+    module('keydown');
+
+
+    test('Can trigger a keydown handler',
+        function () {
+
+      var passedKeycode;
+      var handler = function (keycode) {
+        passedKeycode = keycode;
+      };
+
+      var input = new pine.Input();
+      input.onKeydown(handler);
+      input.keydown(1);
+      equal(passedKeycode, 1,
+          'The handler was called with the correct keycode');
+    });
+
+
+    module('keyup');
+
+
+    test('Can trigger a keyup handler',
+        function () {
+
+      var passedKeycode;
+      var handler = function (keycode) {
+        passedKeycode = keycode;
+      };
+
+      var input = new pine.Input();
+      input.onKeyup(handler);
+      input.keyup(1);
+      equal(passedKeycode, 1,
+          'The handler was called with the correct keycode');
+    });
+
+  } ());
+  </script>
+</head>
+<body>
+  <h1 id="qunit-header">pine.input.js</h1>
+   <h2 id="qunit-banner"></h2>
+   <div id="qunit-testrunner-toolbar"></div>
+   <h2 id="qunit-useragent"></h2>
+   <ol id="qunit-tests"></ol>
+   <div id="qunit-fixture"></div>
+</body>
+</html>

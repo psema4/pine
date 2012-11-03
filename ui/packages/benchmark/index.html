@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  </head>
+  <body>
+    <style>
+      body {
+        background: #fff;
+      }
+      dl {
+        float: left;
+        width: 200px;
+      }
+      dt {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+      #scratch {
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 200px;
+        right: 0;
+      }
+      .js-rotator {
+        height: 100px;
+        position: absolute;
+        width: 100px;
+      }
+      .counter {
+        display: none;
+      }
+    </style>
+    <h1 id="test-name">Pine performance test</h1>
+    <div id="scratch"></div>
+    <dl>
+      <dt>Frames per second:</dt>
+      <dd id="framerate-output"></dd>
+    </dl>
+    <dl id="square-count-output" class="counter">
+      <dt>Squares</dt>
+      <dd>0</dd>
+    </dl>
+    <script src="/api/pine.env.js"></script>
+    <script src="/api/pine.gamepad.js"></script>
+    <script src="js/src/framerate.js"></script>
+    <script src="js/src/benchmark.js"></script>
+  </body>
+</html>
