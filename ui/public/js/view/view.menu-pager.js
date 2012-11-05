@@ -14,6 +14,23 @@ define(['exports'], function (menuPager) {
   /**
    * @param {Backbone.View} menuPager
    */
+  function recalulateHeight (menuPager) {
+    var windowWidth = $win.width();
+    menuPager.$el.width(windowWidth);
+    menuPager._$rail.width(windowWidth * menuPager.menuViews.length);
+
+    var maxMenuHeight = 0;
+    menuPager.menuViews.forEach(function (menuView) {
+      maxMenuHeight = Math.max(menuView.getViewportHeight(), maxMenuHeight);
+    });
+
+    menuPager.$el.height(maxMenuHeight);
+  }
+
+
+  /**
+   * @param {Backbone.View} menuPager
+   */
   function gamepadTick (menuPager) {
     setTimeout(function () {
       gamepadTick(menuPager);
@@ -74,24 +91,11 @@ define(['exports'], function (menuPager) {
       /** @type {jQuery} */
       this._$rail = this.$el.find('.menu-pager-rail');
 
-      this._onWindowResize();
-      $win.on('resize', _.bind(this._onWindowResize, this));
+      recalulateHeight(this);
+      $win.on('resize', _.bind(recalulateHeight, null, this));
       this.activateMenu(0);
 
       gamepadTick(this);
-    }
-
-
-    /**
-     * @param {jQuery.Event} evt
-     * TODO: This method does not need to be part of the View, it should just
-     * be private.
-     */
-    ,'_onWindowResize': function (evt) {
-      var windowWidth = $win.width();
-      this.$el.width(windowWidth);
-      this._$rail.width(windowWidth * this.menuViews.length);
-      this.$el.height(this.getCurrentMenu().getViewportHeight());
     }
 
 

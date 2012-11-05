@@ -110,11 +110,18 @@ define(['exports'], function (menu) {
   /**
    * @param {Backbone.View} menuView
    */
-  function fitMenuToScreen (menuView) {
+  function getMaximumViewportSpace (menuView) {
     var top = menuView._$containingRail.offset().top;
     var bottom = $win.height();
-    var freeSpace = bottom - top;
-    menuView.$el.height(freeSpace);
+    return bottom - top;
+  }
+
+
+  /**
+   * @param {Backbone.View} menuView
+   */
+  function fitMenuToScreen (menuView) {
+    menuView.$el.height(getMaximumViewportSpace(menuView));
   }
 
 
@@ -250,20 +257,19 @@ define(['exports'], function (menu) {
 
     ,'getViewportHeight': function () {
       var children = this._$btnArray.children();
-      var menuViewTop = this.$el.offset().top;
-      var menuViewBottom = $win.height();
+      var viewportSpace = getMaximumViewportSpace(this);
 
       var currentChild, childHeight, i = children.length - 1;
       for (i; i > 0; i--) {
         currentChild = children.eq(i);
         childHeight = currentChild.outerHeight(true);
         var childBottom = currentChild.position().top + childHeight;
-        if (childBottom <= menuViewBottom) {
+        if (childBottom <= viewportSpace) {
           break;
         }
       }
 
-      return childBottom - currentChild.outerHeight(true);
+      return Math.min(childBottom, viewportSpace);
     }
 
 
