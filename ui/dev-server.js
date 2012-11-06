@@ -1,9 +1,17 @@
 var fs = require('fs');
 var express = require('express');
+var mustache = require('mustache');
+var packageMeta = require(__dirname + '/lib/package-meta.js');
+
+
 var server = express();
 
 server.get('/', function (req, res) {
-  var html = fs.readFileSync(__dirname + '/index.html', 'utf8');
+  var template = fs.readFileSync(__dirname + '/index.html', 'utf8');
+  var packageData = {
+    'packageList': packageMeta.getPackageList()
+  };
+  var html = mustache.to_html(template, packageData);
   res.send(html);
 });
 

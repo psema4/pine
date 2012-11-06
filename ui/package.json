@@ -10,7 +10,11 @@
     "url": "https://github.com/jeremyckahn/pine.git"
   },
   "devDependencies": {
-    "express": "*"
+    "express": "*",
+    "shelljs": "*",
+    "json-parse": "*",
+    "underscore": "*",
+    "mustache": "*"
   },
   "author": "Jeremy Kahn"
 }
