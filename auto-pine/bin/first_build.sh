@@ -8,8 +8,7 @@ fi
 
 #config
 WD="./distro"
-#SRC_IMG="${WD}/2012-07-15-wheezy-raspbian.img"
-SRC_IMG="${WD}/2012-09-18-wheezy-raspbian.img"
+SRC_IMG="${WD}/2012-12-16-wheezy-raspbian.img"
 DST_IMG="${WD}/pine.img"
 
 IMG_BS=512
