@@ -5,7 +5,8 @@
 #config
 aria=`which aria2c`
 WD="./distro"
-SRCURL="http://downloads.raspberrypi.org/images/raspbian/2012-07-15-wheezy-raspbian/2012-07-15-wheezy-raspbian.zip.torrent"
+#SRCURL="http://downloads.raspberrypi.org/images/raspbian/2012-07-15-wheezy-raspbian/2012-07-15-wheezy-raspbian.zip.torrent"
+SRCURL="http://downloads.raspberrypi.org/images/raspbian/2012-09-18-wheezy-raspbian/2012-09-18-wheezy-raspbian.zip.torrent"
 
 echo "Auto Pine 0.0"
 echo "Download"

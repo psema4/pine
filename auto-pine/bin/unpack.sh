@@ -3,7 +3,8 @@
 # config
 WD="./distro"
 
-BASEFN="${WD}/2012-07-15-wheezy-raspbian"
+#BASEFN="${WD}/2012-07-15-wheezy-raspbian"
+BASEFN="${WD}/2012-09-18-wheezy-raspbian"
 ZIPFN="${BASEFN}.zip"
 RASPFN="${BASEFN}.img"
 PINEFN="${WD}/pine.img"
@@ -48,7 +49,8 @@ fi
 echo ""
 echo "Checking SHA1 signature..."
 SHA1=`sha1sum ${ZIPFN}`
-GOOD="3947412babbf63f9f022f1b0b22ea6a308bb630c"
+#GOOD="3947412babbf63f9f022f1b0b22ea6a308bb630c"
+GOOD="3bc788d447bc88feaae8382d61364eaba1088e78"
 
 if [ "${SHA1}"="${GOOD}" ]; then
     echo "SHA1 signature matches, unpacking..."
