@@ -1,0 +1,54 @@
+var exec = require('child_process').exec
+  , sys = require('sys')
+;
+
+
+/* synchronous dependencies
+    http://stackoverflow.com/questions/6755819/node-js-and-jake-how-to-call-system-commands-synchronously-within-a-task
+*/
+
+
+/* ----------------------------------------------- */
+desc('Download Raspbian');
+task('download', [], function(params) {
+    console.log('  downloading...');
+
+    // if ! downloaded
+    exec('echo "1" > /tmp/pine-jakefile', function() {
+        complete();
+    });
+}, true);
+
+
+/* ----------------------------------------------- */
+desc('Unpack Raspbian archive');
+task('unpack', ['download'], function(params) {
+    console.log('  unpacking...');
+
+    // if ! unpacked
+    exec('echo "2" >> /tmp/pine-jakefile', function() {
+        complete();
+    });
+}, true);
+
+
+/* ----------------------------------------------- */
+desc('Build Distro');
+task('default', ['unpack'], function(params) {
+    console.log('  building pine image');
+
+    exec('echo "3" >> /tmp/pine-jakefile', function() {
+        complete();
+    });
+},  true);
+
+
+/* ----------------------------------------------- */
+desc('NFS Distro');
+task('nfs', ['default'], function(params) {
+    console.log('  building nfs image');
+
+    exec('echo "4" >> /tmp/pine-jakefile', function() {
+        complete();
+    });
+});
