@@ -33,17 +33,25 @@ echo
 echo "*** Stage 2 ***"
 echo
 
+echo
+echo "getting apt modules"
 apt-get --yes --force-yes install curl xorg nodejs openssh-server git-core vim
 
+echo
+echo "getting rpi-update"
 # Install rpi-update (https://github.com/Hexxeh/rpi-update/)
 wget http://goo.gl/1BOfJ -O /usr/bin/rpi-update && chmod +x /usr/bin/rpi-update
 
+echo
+echo "getting & installing input-event-daemon"
 # Install input-event-daemon
 git clone git://github.com/gandro/input-event-daemon.git /usr/local/lib/input-event-daemon
 cd /usr/local/lib/input-event-daemon
 make
 make install
 
+echo "sleeping for 10s"
+sleep 10
 
 ####### INSTALL CHROMIUM
 echo
@@ -60,6 +68,7 @@ sudo mkdir -p /opt/google/
 cd /opt/google
 sudo wget http://distribution-us.hexxeh.net/chromium-rpi/chromium-rpi-r22.tar.gz -O chromium-rpi.tar.gz
 sudo tar xvf chromium-rpi.tar.gz
+sudo rm chromium-rpi.tar.gz
 sudo chown root:root chrome/chrome-sandbox
 sudo chmod 4755 chrome/chrome-sandbox
 sudo rm -rf /usr/bin/chrome
@@ -114,6 +123,8 @@ echo
 echo "*** Stage 8 ***"
 echo
 
+echo "configuring input-event-daemon"
+echo
 echo \
 "[Global]
 listen = /dev/input/event0
@@ -126,6 +137,10 @@ ESC = sh /home/pine-user/kill_chrome.sh" \
 cd /etc/init.d/
 chmod 755 start_pine_daemons.sh
 update-rc.d start_pine_daemons.sh defaults
+
+echo
+echo "sleeping for 10s"
+sleep 10
 
 echo
 echo "*** FINISHED***"
