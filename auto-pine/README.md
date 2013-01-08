@@ -22,7 +22,7 @@ vim defaults/boot/cmdline.txt # change 192.168.1.1 to the IP address of your NFS
 
 If you already have *this* source image archive:
 
-[[Source](http://www.raspberrypi.org/downloads)] 2012-12-16-wheezy-raspbian.zip 440MB [[Direct](http://downloads.raspberrypi.org/images/raspbian/2012-07-15-wheezy-raspbian/2012-07-15-wheezy-raspbian.zip)] [[Torrent (Preferred)](http://downloads.raspberrypi.org/images/raspbian/2012-07-15-wheezy-raspbian/2012-07-15-wheezy-raspbian.zip.torrent)] SHA-1:`3947412babbf63f9f022f1b0b22ea6a308bb630c`
+[[Source](http://www.raspberrypi.org/downloads)] 2012-12-16-wheezy-raspbian.zip 440MB [[Direct](http://downloads.raspberrypi.org/images/raspbian/2012-12-16-wheezy-raspbian/2012-12-16-wheezy-raspbian.zip)] [[Torrent (Preferred)](http://downloads.raspberrypi.org/images/raspbian/2012-12-16-wheezy-raspbian/2012-12-16-wheezy-raspbian.zip.torrent)] SHA-1:`514974a5fcbbbea02151d79a715741c2159d4b0a`
 
 Then:
 * Move or copy the image archive into the distro folder. It must be named 2012-12-16-wheezy-raspbian.zip
