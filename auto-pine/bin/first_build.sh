@@ -10,6 +10,7 @@ fi
 WD="./distro"
 SRC_IMG="${WD}/2012-12-16-wheezy-raspbian.img"
 DST_IMG="${WD}/pine.img"
+DST_SWAP="${WD}/pine.hdb"
 
 IMG_BS=512
 IMG_START=122880
@@ -51,10 +52,13 @@ echo "modifying filesystem image"
 
 # stage 1
 mv ${PINE_IMGDIR}/etc/inittab ${PINE_IMGDIR}/etc/inittab.orig
+mv ${PINE_IMGDIR}/etc/fstab ${PINE_IMGDIR}/etc/fstab.orig
 rm -v ${PINE_IMGDIR}/etc/profile.d/raspi-config.sh
 cp -av ./defaults/stage-1/etc/inittab ${PINE_IMGDIR}/etc/inittab
+echo "/dev/hdb   swap    swap    defaults    0   0" >> ${PINE_IMGDIR}/etc/fstab
 cp -av ./defaults/stage-1/root/.bashrc ${PINE_IMGDIR}/root/.bashrc
 cp -rav ./defaults/stage-1/root/setup ${PINE_IMGDIR}/root
+cp -av ./defaults/stage-1/etc/init.d/start_pine_daemons.sh ${PINE_IMGDIR}/etc/init.d/start_pine_daemons.sh
 
 echo ""
 echo "setting permissions"
@@ -74,11 +78,17 @@ echo "creating Pine image"
 mv -v ${SRC_IMG} ${DST_IMG}
 
 # get boot partitions
-./bin/boot_parts.sh
+#./bin/boot_parts.sh
+
+if [ ! -f "${DST_SWP}" ]; then
+    echo ""
+    echo "VM swap partition not found, creating"
+    qemu-img create -f raw ${DST_SWAP} 256M
+fi
 
 echo ""
-echo "Running first boot, hda=${DST_IMG}"
-qemu-system-arm -kernel ./kernel-qemu.1176 -cpu arm1176 -M versatilepb -no-reboot -append "root=/dev/sda2 panic=1" -hda ${DST_IMG}
+echo "Running first boot, hda=${DST_IMG} , hdb=${DST_SWAP} (swap)"
+qemu-system-arm -kernel ./kernel-qemu.1176 -cpu arm1176 -M versatilepb -no-reboot -append "root=/dev/sda2 panic=1" -hda ${DST_IMG} -hdb ${DST_SWAP}
 
 echo ""
 echo "Stage: 2 (Pine Setup)"
@@ -111,6 +121,6 @@ echo ""
 echo "./pine.sh"
 
 echo "#!/usr/bin/env bash" > pine.sh
-echo "qemu-system-arm -kernel ./kernel-qemu.1176 -cpu arm1176 -M versatilepb -append \"root=/dev/sda2 panic=1\" -hda ${DST_IMG}" >> pine.sh
+echo "qemu-system-arm -kernel ./kernel-qemu.1176 -cpu arm1176 -M versatilepb -append \"root=/dev/sda2 panic=1\" -hda ${DST_IMG} -hdb ${DST_SWAP}" >> pine.sh
 chmod 744 pine.sh
 
