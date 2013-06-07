@@ -11,8 +11,6 @@ function gameController($scope, $location, splash, $routeParams) {
         canvas.style.left = parseInt(parseInt(window.innerWidth)/2) - 320 + 'px';
         canvas.style.visibility = 'visible';
         return canvas.getContext('2d');
-        canvas.style.visibility = 'visible';
-        return canvas.getContext('2d');
     }
 
     $scope.quit = function() {
