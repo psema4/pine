@@ -38,18 +38,20 @@ testApp.config(function($routeProvider) {
 
             scriptContainer.onload = function() {
                 if (Game && 'run' in Game && typeof Game.run == 'function') {
+                    var startGame = function() {
+                        Game.scope = current.locals.$scope; 
+                        Game.run();
+                    };
+
                     if (Game.splash) {
                         Game.splash.prefix = 'games/' + current.params.id + '/' + (Game.splash.prefix || '');
                         current.locals.$scope.splash(Game.splash);
 
                         var totalSplashDelay = Game.splash.delay * Game.splash.deck.length;
-                        setTimeout(function() {
-                            Game.scope = current.locals.$scope; 
-                            Game.run();
-                        }, totalSplashDelay);
+                        setTimeout(startGame, totalSplashDelay);
 
                     } else {
-                        Game.run();
+                        startGame();
                     }
 
                 } else {

@@ -3,9 +3,9 @@ window.Game = {
 
   , run: function() {
         console.log('test game running');
-        Game.ctx = document.querySelector('canvas').getContext('2d');
 
-        var ctx = Game.ctx;
+        var ctx = Game.scope.setup(); 
+        Game.ctx = ctx;
 
         ctx.fillStyle = 'rgb(255,255,255)';
         ctx.fillRect(0,0,640,480);

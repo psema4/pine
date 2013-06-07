@@ -7,6 +7,7 @@ window.Game = {
         console.log('test game #2 running');
 
         var ctx = Game.scope.setup();
+        Game.ctx = ctx;
 
         ctx.fillStyle = 'rgb(255,255,255)';
         ctx.fillRect(0,0,640,480);
@@ -15,7 +16,13 @@ window.Game = {
         ctx.fillRect(10,10,620,460);
 
         setTimeout(function() {
+            Game.animate();
             Game.scope.splash({ deck: ['splash.png'], prefix: Game.splash.prefix , delay: 150 });
         }, 3000);
+    }
+
+  , animate: function() {
+        var ctx = this.ctx;
+        console.log('this.ctx:', ctx);
     }
 }
