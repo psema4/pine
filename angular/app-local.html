@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Angular Pine Demo</title>
+        <link rel="stylesheet" href="css/app.css" />
+    </head>
+
+    <body ng-app="testapp" ng-controller="startupController">
+        <div id="splash"></div>
+        <div id="view" ng-view></div>
+
+        <script src="lib/angular/angular.js"></script>
+        <script src="services/splash.js"></script>
+        <script src="services/gamepad.js"></script>
+        <script src="controllers/startup.js"></script>
+        <script src="controllers/environment.js"></script>
+        <script src="controllers/game.js"></script>
+        <script src="controllers/store.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>

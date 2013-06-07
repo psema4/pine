@@ -1,0 +1,82 @@
+body,
+.view-container {
+    margin: 0px;
+    padding: 0px;
+    color: #fff;
+    background-color: #000;
+}
+
+.transparent-bg {
+    background-color: transparent;
+}
+
+div.dashboard {
+}
+
+button.launcher,
+button.quit {
+    display: 'inline-block';
+    margin: 1em;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    -webkit-appearance: none;
+    text-shadow: 1px 1px 1px #000;
+}
+
+button.launcher {
+    width: 80px;
+    height: 80px;
+    font-size: 16px;
+    padding-top: 52px;
+}
+
+button.quit {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 40px;
+    height: 40px;
+    font-size: 10px;
+    padding-top: 0px;
+}
+
+button.img-button-pine1,
+button.img-button-pine2 {
+    background-image: url(../assets/splash/splash1.png);
+    background-repeat: no-repeat;
+    background-position: 10% 10%;
+    background-size: 100% auto;
+}
+button.img-button-pine2 {
+    background-image: url(../assets/splash/splash2.png);
+}
+
+button.reverse {
+    color: #fff;
+}
+
+#splash,
+#view {
+    z-index: 100;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+#splash {
+    z-index: 1000;
+    background-color: #000;
+    color: #fff;
+    font-size: 96px;
+    line-height: 192px;
+    display: none;
+}
+
+canvas {
+    position: absolute;
+    top: 0px;
+    visibility: hidden;
+}
