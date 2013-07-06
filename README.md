@@ -8,3 +8,6 @@ about Pine and discuss ideas or questions in the [Google
 Group](https://groups.google.com/forum/#!forum/pine-discuss).  Participation of
 any kind is welcomed and encouraged!
 
+## Note
+
+2013-07-06: This repo is going to be restructured over the next few days; code currently available should be considered deprecated.
